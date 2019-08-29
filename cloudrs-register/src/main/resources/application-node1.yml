@@ -1,0 +1,18 @@
+server:
+  port: 9991
+
+
+spring:
+  application:
+    name: register-node1
+
+eureka:
+  instance:
+    hostname: node1
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://node2:9992/eureka/,http://node3:9993/eureka/
+  server:
+    renewalPercentThreshold: 0.49

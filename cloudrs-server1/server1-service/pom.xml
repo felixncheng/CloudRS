@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cloudrs-server1</artifactId>
+        <groupId>io.github.chengmboy</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>server1-service</artifactId>
+
+    <properties>
+        <server1-remote-service-api.version>1.0-SNAPSHOT</server1-remote-service-api.version>
+        <server2-remote-service-api.version>1.0-SNAPSHOT</server2-remote-service-api.version>
+        <cloudrs-common.version>1.0-SNAPSHOT</cloudrs-common.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
+        <!-- 项目依赖 -->
+        <dependency>
+            <groupId>io.github.chengmboy</groupId>
+            <artifactId>server1-service-remote-api</artifactId>
+            <version>${server1-remote-service-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.chengmboy</groupId>
+            <artifactId>server2-service-remote-api</artifactId>
+            <version>${server2-remote-service-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.chengmboy</groupId>
+            <artifactId>cloudrs-common</artifactId>
+            <version>${cloudrs-common.version}</version>
+        </dependency>
+    </dependencies>
+</project>
