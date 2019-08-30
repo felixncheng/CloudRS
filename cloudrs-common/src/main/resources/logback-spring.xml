@@ -1,25 +1,24 @@
-<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     ​
     <springProperty scope="context" name="springAppName" source="spring.application.name" defaultValue="cloudrs" />
-    &lt;!&ndash; Example for logging into the build folder of your project &ndash;&gt;
+    <!-- Example for logging into the build folder of your project -->
     <property name="log.path" value="logs/${springAppName}"/>​
 
-    &lt;!&ndash; You can override this to have a custom pattern &ndash;&gt;
+    <!-- You can override this to have a custom pattern -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 
-    &lt;!&ndash; Console log output &ndash;&gt;
+    <!-- Console log output -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    &lt;!&ndash; Log file debug output &ndash;&gt;
+    <!-- Log file debug output -->
     <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -32,7 +31,7 @@
         </encoder>
     </appender>
 
-    &lt;!&ndash; Log file error output &ndash;&gt;
+    <!-- Log file error output -->
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -48,10 +47,10 @@
         </filter>
     </appender>
 
-    &lt;!&ndash; Level: FATAL 0  ERROR 3  WARN 4  INFO 6  DEBUG 7 &ndash;&gt;
+    <!-- Level: FATAL 0  ERROR 3  WARN 4  INFO 6  DEBUG 7 -->
     <root level="INFO">
         <appender-ref ref="console" />
         <appender-ref ref="debug" />
         <appender-ref ref="error" />
     </root>
-</configuration>-->
+</configuration>

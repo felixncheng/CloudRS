@@ -14,6 +14,7 @@
         <module>cloudrs-server2</module>
         <module>cloudrs-common</module>
         <module>cloudrs-gateway</module>
+        <module>cloudrs-config</module>
     </modules>
 
 

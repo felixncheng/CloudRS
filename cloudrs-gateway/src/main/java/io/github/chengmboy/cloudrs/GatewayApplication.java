@@ -1,16 +1,16 @@
-package io.github.chengmboy;
+package io.github.chengmboy.cloudrs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
+@EnableZuulProxy
 @EnableEurekaClient
-@EnableFeignClients
 @SpringBootApplication
-public class Service2Application {
+public class GatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Service2Application.class, args);
+		SpringApplication.run(GatewayApplication.class, args);
 	}
 }

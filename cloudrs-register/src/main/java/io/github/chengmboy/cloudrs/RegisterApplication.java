@@ -1,4 +1,4 @@
-package io.github.chengmboy.cloudrs.register;
+package io.github.chengmboy.cloudrs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,26 @@
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:9991/eureka/
+management:
+    endpoints:
+        web:
+            exposure:
+                include: bus-refresh
+server:
+    port: 8888
+spring:
+    application:
+        name: cloudrs-config
+    cloud:
+        config:
+            label: master
+            server:
+                git:
+                    searchPaths: respo
+                    uri: https://github.com/chengmboy/springcloud-config
+    rabbitmq:
+        host: 14.116.177.218
+        password: guest
+        port: 5672
+        username: guest
