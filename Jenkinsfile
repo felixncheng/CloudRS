@@ -7,6 +7,12 @@ pipeline {
 
   }
   stages {
+    stage('Build') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
+      }
+    }
+
     stage('Test') {
       steps {
         echo 'Testing'
@@ -14,7 +20,8 @@ pipeline {
     }
     stage('Deploy - Staging') {
       steps {
-        echo 'Staging'
+       sh 'chmod +x ./jenkins/scripts/deploy.sh'
+       sh './jenkins/scripts/deploy.sh Staging'
       }
     }
     stage('Sanity check') {
@@ -24,8 +31,7 @@ pipeline {
     }
     stage('Deploy - Production') {
       steps {
-        sh 'chmod +x ./jenkins/scripts/deliver.sh'
-        sh './jenkins/scripts/deliver.sh'
+        sh './jenkins/scripts/deploy.sh Production'
       }
     }
   }
