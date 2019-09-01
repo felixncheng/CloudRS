@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Deploy - Staging') {
       steps {
-        sh './jenkins/scripts/deliver.sh'
+        echo 'Staging'
       }
     }
     stage('Sanity check') {
