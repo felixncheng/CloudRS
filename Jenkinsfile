@@ -18,7 +18,7 @@ pipeline {
         }
        stage('Deploy - Staging') {
            steps {
-               sh './deploy staging'
+               sh './deploy/staging.sh'
            }
        }
 
@@ -30,7 +30,7 @@ pipeline {
 
        stage('Deploy - Production') {
            steps {
-               sh './deploy production'
+               sh './deploy/production.sh'
            }
        }
     }
