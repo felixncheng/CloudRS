@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo 'deploy $1'
+echo 'deploy staging'
