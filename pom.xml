@@ -8,7 +8,7 @@
     <artifactId>cloudrs</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
+<!--    <modules>
         <module>cloudrs-register</module>
         <module>cloudrs-server1</module>
         <module>cloudrs-server2</module>
@@ -16,7 +16,7 @@
         <module>cloudrs-gateway</module>
         <module>cloudrs-config</module>
         <module>cloudrs-ram</module>
-    </modules>
+    </modules>-->
 
 
     <parent>
