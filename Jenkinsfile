@@ -6,10 +6,32 @@ pipeline {
         }
     }
     stages {
-        stage('Deliver') {
+        stage('Build') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
+        stage('Test') {
+            steps {
+                 echo 'Testing'
+            }
+        }
+       stage('Deploy - Staging') {
+           steps {
+               echo 'Staging'
+           }
+       }
+
+       stage('Sanity check') {
+           steps {
+               input "Does the staging environment look ok?"
+           }
+       }
+
+       stage('Deploy - Production') {
+           steps {
+               echo 'Production'
+           }
+       }
     }
 }
