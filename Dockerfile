@@ -13,7 +13,7 @@ ENV JAVA_OPTS="" \
 #    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 #    echo "Asia/Shanghai" > /etc/timezone
 
-COPY target/$JAR_FILE $WORK_PATH/
+COPY $JAR_FILE $WORK_PATH/
 
 WORKDIR $WORK_PATH
 
