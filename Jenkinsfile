@@ -27,7 +27,7 @@ pipeline {
             }
             agent any
             steps {
-               sh 'sh ./jenkins/scripts/build.sh'
+               sh 'bash ./jenkins/scripts/build.sh'
             }
             
         }
