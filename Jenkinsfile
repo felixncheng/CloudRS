@@ -1,38 +1,40 @@
+// 需要在jenkins的Credentials设置中配置docker-hub-creds参数
 pipeline {
-  agent {
-    docker {
-      image 'maven:3-alpine'
-      args '-v /root/.m2:/root/.m2'
+    agent any
+    environment {
+        DOCKER_HUB_CREDS = credentials('docker-hub-creds')
+        GIT_TAG = sh(returnStdout: true,script: 'git describe --tags --always').trim()
     }
+    stages {
+        stage('Maven Build') {
+            when { expression { env.GIT_TAG != null } }
+            agent {
+                docker {
+                    image 'maven:3-jdk-8-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+                stash includes: 'target/*.jar', name: 'app'
+            }
 
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh 'mvn -B -DskipTests clean package'
-      }
+        }
+        stage('Docker Build') {
+            when { 
+                allOf {
+                    expression { env.GIT_TAG != null }
+                }
+            }
+            agent any
+            steps {
+               sh 'sh ./jenkins/scripts/build.sh'
+            }
+            
+        }
+        stage('Deploy') {
+            echo 'deploy'
+        }
+        
     }
-
-    stage('Test') {
-      steps {
-        echo 'Testing'
-      }
-    }
-    stage('Deploy - Staging') {
-      steps {
-       sh 'chmod +x ./jenkins/scripts/deploy.sh'
-       sh './jenkins/scripts/deploy.sh Staging'
-      }
-    }
-    stage('Sanity check') {
-      steps {
-        input 'Does the staging environment look ok?'
-      }
-    }
-    stage('Deploy - Production') {
-      steps {
-        sh './jenkins/scripts/deploy.sh Production'
-      }
-    }
-  }
 }
