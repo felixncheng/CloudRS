@@ -2,7 +2,7 @@
 
 docker login -u ${DOCKER_HUB_CREDS_USR} -p ${DOCKER_HUB_CREDS_PSW}
 
-#获取所有jar包路径
+
 jars_path=$(find . -name *.jar |grep -v source |grep -v remote |grep -v common)
 
 for jar_file in ${jars_path[*]}
