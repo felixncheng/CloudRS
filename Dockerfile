@@ -6,6 +6,7 @@ ARG WORK_PATH="/opt/demo"
 # 环境变量
 ENV JAVA_OPTS="" \
     JAR_FILE=${JAR_FILE}
+    JAR_PATH=${JAR_PATH}
 
 #设置时区
 #RUN apk update && apk add ca-certificates && \
@@ -13,7 +14,7 @@ ENV JAVA_OPTS="" \
 #    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 #    echo "Asia/Shanghai" > /etc/timezone
 
-COPY $JAR_FILE $WORK_PATH/
+COPY $JAR_PATH $WORK_PATH/
 
 WORKDIR $WORK_PATH
 
