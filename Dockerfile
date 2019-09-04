@@ -2,7 +2,8 @@ FROM openjdk:8-jdk-alpine
 
 #构建参数
 ARG JAR_FILE
-ARG WORK_PATH="/opt/demo"
+ARG WORK_PATH="/app"
+ARG JAR_PATH
 # 环境变量
 ENV JAVA_OPTS="" \
     JAR_FILE=${JAR_FILE}\

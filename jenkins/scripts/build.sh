@@ -11,7 +11,7 @@ do
     jar_file=$(echo $jar_path | awk -F "[/]" '{print $NF}')
     image=chengmboy/$(echo $jar_file|cut -d '-'  -f 1-2)
 
-    docker build --build-arg JAR_PATH=$jar_path JAR_FILE=$jar_file -t $image:${GIT_TAG} .
+    docker build --build-arg JAR_PATH=$jar_path --build-arg JAR_FILE=$jar_file -t $image:${GIT_TAG} .
 
     docker push $image:${GIT_TAG}
 
