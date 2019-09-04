@@ -5,7 +5,7 @@ ARG JAR_FILE
 ARG WORK_PATH="/opt/demo"
 # 环境变量
 ENV JAVA_OPTS="" \
-    JAR_FILE=${JAR_FILE}
+    JAR_FILE=${JAR_FILE}\
     JAR_PATH=${JAR_PATH}
 
 #设置时区
