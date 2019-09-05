@@ -9,7 +9,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'APP_NAME', defaultValue:'cloudrs-' description: '需要重新部署的服务名')
+        string(name: 'APP_NAME', defaultValue:'cloudrs-', description: '需要重新部署的服务名')
     }
 
     stages {
