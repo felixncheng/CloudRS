@@ -32,8 +32,6 @@ pipeline {
                         script {
                            server = getHost()
                     }
-                    server.host = ${ECS_CREDS_USR}
-                    server.password = ${ECS_CREDS_PSW}
             }
         }
         stage('deploy'){
