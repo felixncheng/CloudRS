@@ -1,66 +1,33 @@
-// 需要在jenkins的Credentials设置中配置docker-hub-creds参数
-
 def getHost(){
     def remote = [:]
     remote.name = 'mysql'
-    remote.host = 'localhost'
+    remote.host = '192.168.8.108'
     remote.user = 'root'
     remote.port = 22
-    remote.password = 'password'
+    remote.password = 'qweasd'
     remote.allowAnyHosts = true
     return remote
 }
-
 pipeline {
-    agent any
-    environment {
-        DOCKER_HUB_CREDS = credentials('docker-hub-creds')
-        GIT_TAG = sh(returnStdout: true,script: 'git describe --tags --always').trim()
-        ECS_CREDS = credentials('ecs-creds')
-    }
-
-    parameters {
-        string(name: 'APP_NAME', description: '需要重新部署的服务名')
-    }
-
+    agent {label 'master'}
+    environment{
+        def server = ''
+    }   
     stages {
-        stage('Maven Build') {
-            when { expression { env.GIT_TAG != null } }
-            agent {
-                docker {
-                    image 'maven:3-jdk-8-alpine'
-                    args '-v $HOME/.m2:/root/.m2'
-                }
-            }
-            steps {
-                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
-            }
-
-        }
-        stage('Docker Build') {
-            when {
-                allOf {
-                    expression { env.GIT_TAG != null }
-                }
-            }
-            agent any
-            steps {
-               sh 'bash ./jenkins/scripts/build.sh'
-            }
-        }
-
         stage('init-server'){
-                    steps {
-                        script {
-                           server = getHost()
-                           server.host = ${ECS_CREDS_USR}
-                           server.password = ${ECS_CREDS_PSW}
-                    }
+            steps {
+                script {                 
+                   server = getHost()                                   
+                }
             }
         }
-        stage('deploy'){
+        stage('use'){
             steps {
-                sshScript remote: server,script: "./jenkins/scripts/deploy.sh"
+                script {
+                  sshCommand remote: server, command: """                 
+                  if test ! -d aaa/ccc ;then mkdir -p aaa/ccc;fi;cd aaa/ccc;rm -rf ./*;echo 'aa' > aa.log
+                  """
+                }
             }
         }
     }

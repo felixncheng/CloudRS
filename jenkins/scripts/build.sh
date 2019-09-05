@@ -11,7 +11,7 @@ do
     jar_file=$(echo $jar_path | awk -F "[/]" '{print $NF}')
     image=chengmboy/$app_name
 
-    if test $app_name == ${APP_NAME};then
+    if test $app_name = ${APP_NAME};then
         docker build --build-arg JAR_PATH=$jar_path --build-arg JAR_FILE=$jar_file -t $image:${GIT_TAG} .
 
         docker push $image:${GIT_TAG}
