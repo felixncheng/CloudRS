@@ -60,9 +60,7 @@ pipeline {
         }
         stage('deploy'){
             steps {
-                script{
-                 sshScript remote: server,script: "./jenkins/scripts/deploy.sh"
-                }
+                sshScript remote: server,script: "./jenkins/scripts/deploy.sh"
             }
         }
     }
