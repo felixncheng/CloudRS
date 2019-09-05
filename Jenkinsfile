@@ -9,7 +9,7 @@ def getHost(){
     return remote
 }
 pipeline {
-    agent {label 'master'}
+    agent any
     environment{
         def server = ''
     }   
