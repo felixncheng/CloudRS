@@ -34,12 +34,6 @@ pipeline {
                     }
             }
         }
-        stage('deploy'){
-            steps {
-                script{
-                    sshScript remote: server,script: "./jenkins/scripts/deploy.sh"
-                }
-            }
-        }
+
     }
 }
