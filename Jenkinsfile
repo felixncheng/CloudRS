@@ -3,10 +3,10 @@
 def getHost(){
     def remote = [:]
     remote.name = 'mysql'
-    remote.host = 'localhost'
+    remote.host = ${ECS_CREDS_USR}
     remote.user = 'root'
     remote.port = 22
-    remote.password = 'password'
+    remote.password = ${ECS_CREDS_PSW}
     remote.allowAnyHosts = true
     return remote
 }
@@ -17,7 +17,6 @@ pipeline {
         DOCKER_HUB_CREDS = credentials('docker-hub-creds')
         GIT_TAG = sh(returnStdout: true,script: 'git describe --tags --always').trim()
         ECS_CREDS = credentials('ecs-creds')
-        def server = ''
     }
 
     parameters {
@@ -34,6 +33,12 @@ pipeline {
                     }
             }
         }
-
+        stage('deploy'){
+            steps {
+                script{
+                 sshScript remote: getHost,script: "./jenkins/scripts/deploy.sh"
+                }
+            }
+        }
     }
 }
