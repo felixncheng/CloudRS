@@ -13,12 +13,11 @@ pipeline {
     }
 
     def remote = [:]
-    remote.name = 'cloudrs-server'
-    remote.host = ${ECS_CREDS_USR}
-    remote.user = 'root'
-    remote.port = 22
-    remote.password = ${ECS_CREDS_PSW}
-    remote.allowAnyHosts = true
+      remote.name = 'test'
+      remote.host = 'test.domain.com'
+      remote.user = 'root'
+      remote.password = 'password'
+      remote.allowAnyHosts = true
     stages {
         stage('Maven Build') {
             when { expression { env.GIT_TAG != null } }
