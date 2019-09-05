@@ -12,6 +12,13 @@ pipeline {
         string(name: 'APP_NAME', description: '需要重新部署的服务名')
     }
 
+    def remote = [:]
+    remote.name = 'cloudrs-server'
+    remote.host = ${ECS_CREDS_USR}
+    remote.user = 'root'
+    remote.port = 22
+    remote.password = ${ECS_CREDS_PSW}
+    remote.allowAnyHosts = true
     stages {
         stage('Maven Build') {
             when { expression { env.GIT_TAG != null } }
@@ -40,13 +47,6 @@ pipeline {
 
         stage('deploy'){
             steps {
-                def remote = [:]
-                remote.name = 'cloudrs-server'
-                remote.host = ${ECS_CREDS_USR}
-                remote.user = 'root'
-                remote.port = 22
-                remote.password = ${ECS_CREDS_PSW}
-                remote.allowAnyHosts = true
                 sshScript remote: remote,script: "deploy.sh"
             }
         }
