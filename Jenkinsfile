@@ -38,11 +38,10 @@ pipeline {
             }
         }
         def remote = [:]
-        remote.name = 'cloudrs-server'
-        remote.host = ${ECS_CREDS_USR}
+        remote.name = 'test'
+        remote.host = 'test.domain.com'
         remote.user = 'root'
-        remote.port = 22
-        remote.password = ${ECS_CREDS_PSW}
+        remote.password = 'password'
         remote.allowAnyHosts = true
         stage('deploy'){
             steps {
