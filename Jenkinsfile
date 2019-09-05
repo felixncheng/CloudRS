@@ -40,19 +40,14 @@ pipeline {
 
         stage('deploy'){
             steps {
-                script {
-                def getHost(){
-                    def remote = [:]
-                    remote.name = 'cloudrs-server'
-                    remote.host = ${ECS_CREDS_USR}
-                    remote.user = 'root'
-                    remote.port = 22
-                    remote.password = ${ECS_CREDS_PSW}
-                    remote.allowAnyHosts = true
-                    return remote
-                }
-                    sshScript remote: remote,script: "deploy.sh"
-                }
+                def remote = [:]
+                remote.name = 'cloudrs-server'
+                remote.host = ${ECS_CREDS_USR}
+                remote.user = 'root'
+                remote.port = 22
+                remote.password = ${ECS_CREDS_PSW}
+                remote.allowAnyHosts = true
+                sshScript remote: remote,script: "deploy.sh"
             }
         }
     }
