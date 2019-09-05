@@ -17,6 +17,7 @@ pipeline {
         DOCKER_HUB_CREDS = credentials('docker-hub-creds')
         GIT_TAG = sh(returnStdout: true,script: 'git describe --tags --always').trim()
         ECS_CREDS = credentials('ecs-creds')
+        def server = ''
     }
 
     parameters {
