@@ -18,8 +18,6 @@ pipeline {
         GIT_TAG = sh(returnStdout: true,script: 'git describe --tags --always').trim()
         ECS_CREDS = credentials('ecs-creds')
         def server = ''
-        server.host = ${ECS_CREDS_USR}
-        server.password = ${ECS_CREDS_PSW}
     }
 
     parameters {
@@ -34,6 +32,8 @@ pipeline {
                         script {
                            server = getHost()
                     }
+                    server.host = ${ECS_CREDS_USR}
+                    server.password = ${ECS_CREDS_PSW}
             }
         }
         stage('deploy'){
