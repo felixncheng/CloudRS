@@ -1,6 +1,6 @@
 package io.github.chengmboy.cloudrs.common.web;
 
-import io.github.chengmboy.cloudrs.common.util.TraceUtil;
+import io.github.chengmboy.cloudrs.common.util.spring.TraceUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;

@@ -37,5 +37,9 @@ spring:
      password: guest
      port: 5672
      username: guest
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 #  zipkin:
 #    base-url: http://localhost:9412/ # 指定了 Zipkin 服务器的地址

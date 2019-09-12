@@ -1,5 +1,7 @@
 package io.github.chengmboy.cloudrs.ram.controller;
 
+import java.security.GeneralSecurityException;
+
 import com.alibaba.fastjson.JSONObject;
 import io.github.chengmboy.cloudrs.common.web.Response;
 import io.github.chengmboy.cloudrs.ram.pojo.dto.UserDTO;
@@ -27,7 +29,7 @@ public class UserController {
 
     private final UserService userService;
     @PostMapping
-    public Response<UserVO> register(@RequestBody UserRegisterDTO user) {
+    public Response<UserVO> register(@RequestBody UserRegisterDTO user) throws GeneralSecurityException {
         log.info(JSONObject.toJSONString(user));
         UserDTO userDTO = userService.register(user);
         UserVO userVO = new UserVO();

@@ -1,4 +1,4 @@
-package io.github.chengmboy.cloudrs.common.util;
+package io.github.chengmboy.cloudrs.common.util.spring;
 
 
 import brave.Span;

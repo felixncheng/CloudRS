@@ -1,5 +1,6 @@
 package io.github.chengmboy.cloudrs.ram.pojo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -19,4 +20,13 @@ public class User {
     private String email;
 
     private String phone;
+
+    @Column(nullable = false,length = 20)
+    private  String loginName;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String salt;
 }
