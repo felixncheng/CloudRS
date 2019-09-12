@@ -15,6 +15,7 @@
     <properties>
         <cloudrs-common.version>1.0-SNAPSHOT</cloudrs-common.version>
         <cloudrs-ram-service-remote-api.version>1.0-SNAPSHOT</cloudrs-ram-service-remote-api.version>
+        <springfox-version>2.7.0</springfox-version>
     </properties>
 
     <dependencies>
@@ -40,6 +41,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--SpringFox dependencies -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-version}</version>
         </dependency>
 
     </dependencies>
