@@ -3,7 +3,6 @@ package io.github.chengmboy.cloudrs.common.web;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
-import io.github.chengmboy.cloudrs.common.exception.CloudrsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
