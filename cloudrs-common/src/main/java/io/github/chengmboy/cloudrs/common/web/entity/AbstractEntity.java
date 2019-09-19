@@ -2,6 +2,7 @@ package io.github.chengmboy.cloudrs.common.web.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
 import lombok.Data;
@@ -10,12 +11,14 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * @author cheng_mboy
  */
 @Data
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class AbstractEntity extends IdEntity {
 
     @CreatedBy

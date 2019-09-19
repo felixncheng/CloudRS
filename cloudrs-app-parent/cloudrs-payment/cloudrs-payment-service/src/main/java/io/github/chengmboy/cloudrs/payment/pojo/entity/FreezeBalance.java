@@ -26,5 +26,6 @@ public class FreezeBalance extends AbstractEntity{
     /**
      * 冻结数量
      * */
-    private BigDecimal freeze;
+    @Column(precision = 10,scale = 2)
+    private BigDecimal freeze = BigDecimal.ZERO;
 }

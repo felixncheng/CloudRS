@@ -18,6 +18,6 @@ public class Balance extends AbstractEntity{
     private Long userId;
 
     @Column(precision = 10,scale = 2)
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
 
 }
