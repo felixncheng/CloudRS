@@ -14,9 +14,10 @@
 
     <modules>
         <module>cloudrs-payment</module>
-        <module>cloudrs-ram</module>
+        <module>cloudrs-passport</module>
         <module>cloudrs-order</module>
         <module>cloudrs-resource</module>
+        <module>cloudrs-auth</module>
     </modules>
 
     <properties>

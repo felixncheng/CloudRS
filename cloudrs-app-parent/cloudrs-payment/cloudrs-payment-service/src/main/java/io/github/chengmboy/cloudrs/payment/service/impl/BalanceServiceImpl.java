@@ -1,14 +1,16 @@
 package io.github.chengmboy.cloudrs.payment.service.impl;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import io.github.chengmboy.cloudrs.common.exception.EntityAlreadyExistException;
 import io.github.chengmboy.cloudrs.common.exception.EntityNotFoundException;
-import io.github.chengmboy.cloudrs.payment.exception.OutOfMoneyException;
-import io.github.chengmboy.cloudrs.payment.pojo.dto.BalanceDTO;
+import io.github.chengmboy.cloudrs.payment.api.exception.OutOfMoneyException;
+import io.github.chengmboy.cloudrs.payment.api.dto.BalanceDTO;
 import io.github.chengmboy.cloudrs.payment.pojo.entity.Balance;
 import io.github.chengmboy.cloudrs.payment.pojo.entity.FreezeBalance;
 import io.github.chengmboy.cloudrs.payment.pojo.repository.BalanceRepository;
+import io.github.chengmboy.cloudrs.payment.pojo.repository.FreezeBalanceRepository;
 import io.github.chengmboy.cloudrs.payment.service.BalanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +24,15 @@ import org.springframework.stereotype.Service;
 public class BalanceServiceImpl implements BalanceService {
 
     final BalanceRepository balanceRepository;
+    final FreezeBalanceRepository freezeBalanceRepository;
+
+    @Override
+    public BalanceDTO query(Long userId) {
+        Balance balance = balanceRepository.findByUserId(userId);
+        BalanceDTO balanceDTO = new BalanceDTO();
+        BeanUtils.copyProperties(balance ,balanceDTO);
+        return balanceDTO;
+    }
 
     @Override
     public BalanceDTO freeze(Long balanceId, BigDecimal num) throws OutOfMoneyException {
@@ -29,28 +40,48 @@ public class BalanceServiceImpl implements BalanceService {
         Balance balance = balanceRepository.getOne(balanceId);
 
         //检查余额是否足够
-        if (balance.getBalance().compareTo(num) < 0) {
+        BigDecimal current = balance.getBalance();
+        List<FreezeBalance> freezeBalances = balance.getFreezeBalances();
+        BigDecimal freezeCount = freezeBalances.stream()
+                .map(FreezeBalance::getFreeze)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal available = current.subtract(freezeCount);
+        if (available.compareTo(num) < 0) {
             throw new OutOfMoneyException();
         }
         FreezeBalance freezeBalance = new FreezeBalance();
         freezeBalance.setBalance(balance);
         freezeBalance.setFreeze(num);
+        freezeBalanceRepository.save(freezeBalance);
         BalanceDTO balanceDTO = new BalanceDTO();
         BeanUtils.copyProperties(balance ,balanceDTO);
+        balanceDTO.setFreezeBalance(freezeCount.add(num));
         return balanceDTO;
     }
 
     @Override
-    public void deduct(Long freezeId) {
-
+    public void deduct(Long freezeId){
+        FreezeBalance freezeBalance = freezeBalanceRepository.getOne(freezeId);
+        Balance balance = balanceRepository.getOne(freezeBalance.getBalance().getId());
+        BigDecimal current = balance.getBalance().subtract(freezeBalance.getFreeze());
+        balance.setBalance(current);
+        balanceRepository.save(balance);
+        freezeBalanceRepository.delete(freezeBalance);
     }
 
     @Override
-    public BalanceDTO pay(Long balanceId, BigDecimal num) throws EntityNotFoundException {
+    public void cancel(Long freezeId) {
+        FreezeBalance freezeBalance = freezeBalanceRepository.getOne(freezeId);
+        Balance balance = balanceRepository.getOne(freezeBalance.getBalance().getId());
+        BigDecimal current = balance.getBalance().add(freezeBalance.getFreeze());
+        balance.setBalance(current);
+        balanceRepository.save(balance);
+        freezeBalanceRepository.delete(freezeBalance);
+    }
+
+    @Override
+    public BalanceDTO recharge(Long balanceId, BigDecimal num){
         Balance balance = balanceRepository.getOne(balanceId);
-        if (balance == null) {
-            throw new EntityNotFoundException();
-        }
         BigDecimal current = balance.getBalance().add(num);
         balance.setBalance(current);
         balanceRepository.save(balance);

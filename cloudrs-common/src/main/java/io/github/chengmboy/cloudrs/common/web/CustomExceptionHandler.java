@@ -18,9 +18,9 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Throwable.class)
     public final ResponseEntity<String> handleGeneraException(Throwable ex, HttpServletRequest request) {
+        log.error("catch exception:{} ",ex);
         Response response = Response.error(ex);
         String bodyStr = JSONObject.toJSONString(response);
-        log.info(bodyStr);
         return new ResponseEntity<>(bodyStr, HttpStatus.OK);
     }
 }

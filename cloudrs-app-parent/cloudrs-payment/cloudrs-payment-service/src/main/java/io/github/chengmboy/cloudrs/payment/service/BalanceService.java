@@ -4,13 +4,18 @@ import java.math.BigDecimal;
 
 import io.github.chengmboy.cloudrs.common.exception.EntityAlreadyExistException;
 import io.github.chengmboy.cloudrs.common.exception.EntityNotFoundException;
-import io.github.chengmboy.cloudrs.payment.exception.OutOfMoneyException;
-import io.github.chengmboy.cloudrs.payment.pojo.dto.BalanceDTO;
+import io.github.chengmboy.cloudrs.payment.api.exception.OutOfMoneyException;
+import io.github.chengmboy.cloudrs.payment.api.dto.BalanceDTO;
 
 /**
  * @author cheng_mboy
  */
 public interface BalanceService {
+
+    /**
+     * 查询账户
+     */
+    BalanceDTO query(Long userId);
 
     /**
      *
@@ -28,9 +33,14 @@ public interface BalanceService {
     void deduct(Long freezeId);
 
     /**
+     * 取消冻结
+     * */
+    void cancel(Long freezeId);
+
+    /**
      * 充值
      */
-    BalanceDTO pay(Long balanceId, BigDecimal num) throws EntityNotFoundException;
+    BalanceDTO recharge(Long balanceId, BigDecimal num);
 
     /**
      * 创建账户

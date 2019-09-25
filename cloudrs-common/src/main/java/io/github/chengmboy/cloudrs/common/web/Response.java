@@ -20,6 +20,9 @@ public class Response<T> {
     public static <T> Response<T> ok(T data) {
         return new Response<>(TraceUtil.getTraceId(), HttpStatus.OK.value(), null, data);
     }
+    public static <T> Response<T> ok() {
+        return new Response<>(TraceUtil.getTraceId(), HttpStatus.OK.value(), null, null);
+    }
 
     public static <T> Response<T> error(Throwable e) {
         return new Response<>(TraceUtil.getTraceId(), HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
