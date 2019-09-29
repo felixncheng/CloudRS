@@ -1,3 +1,21 @@
+server:
+    port: 8888
+spring:
+    application:
+        name: cloudrs-config
+    cloud:
+        config:
+            server:
+                native:
+                    search-locations: classpath:/repository
+    rabbitmq:
+        host: rabbitmq-node1.cloudrs
+        password: guest
+        port: 5672
+        username: guest
+    profiles:
+        active: native
+
 eureka:
     client:
         serviceUrl:
@@ -7,20 +25,3 @@ management:
         web:
             exposure:
                 include: bus-refresh
-server:
-    port: 8888
-spring:
-    application:
-        name: cloudrs-config
-    cloud:
-        config:
-            label: master
-            server:
-                git:
-                    searchPaths: cloudrs
-                    uri: https://github.com/chengmboy/springcloud-config
-    rabbitmq:
-        host: rabbitmq-node1.cloudrs
-        password: guest
-        port: 5672
-        username: guest

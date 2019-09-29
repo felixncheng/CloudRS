@@ -10,9 +10,9 @@ eureka:
   instance:
     hostname: register-node1
   client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://register-node2.cloudrs:9992/eureka/,http://register-node3.cloudrs:9993/eureka/
+    registerWithEureka: false
+    fetchRegistry: false
+    #serviceUrl:
+      #defaultZone: http://register-node2.cloudrs:9992/eureka/,http://register-node3.cloudrs:9993/eureka/
   server:
     renewalPercentThreshold: 0.49

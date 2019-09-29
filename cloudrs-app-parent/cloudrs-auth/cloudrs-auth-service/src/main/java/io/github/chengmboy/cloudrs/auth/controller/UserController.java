@@ -45,6 +45,6 @@ public class UserController {
     @PostMapping("login")
     public Response<UserVO> login(@Validated @ApiParam @RequestBody UserRegisterDTO user) throws GeneralSecurityException {
 
-        return Response.ok(userVO);
+        return Response.ok(null);
     }
 }

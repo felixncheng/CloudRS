@@ -1,44 +1,22 @@
+spring:
+  application:
+    name: passport
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: cloudrs-config
+      fail-fast: true
+      profile: ${spring.profiles.active}
+  profiles:
+    active: dev
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://register-node1.cloudrs:9991/eureka/
-server:
-  port: 8764
 
-spring:
-  application:
-    name: passport
-  datasource:
-       url: jdbc:mysql://mysql.cloudrs:3306/payment?useUnicode=true&characterEncoding=utf-8&&useSSL=false&&serverTimezone=Asia/Shanghai
-       username: root
-       password: 123456
-       driver-class-name: com.mysql.jdbc.Driver
-  sleuth:
-      web:
-        client:
-          enabled: true
-      sampler:
-          probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
-  cloud:
-      config:
-        discovery:
-          enabled: true
-          serviceId: cloudrs-config
-        fail-fast: true
-        label: master
-        profile: dev
-        retry:
-          initial-interval: 1000
-          max-attempts: 1
-          max-interval: 2000
-          multiplier: 1.1
-  rabbitmq:
-     host: rabbitmq-node1.cloudrs
-     password: guest
-     port: 5672
-     username: guest
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    database-platform: io.github.chengmboy.cloudrs.common.mysql.MySQL57InnodbNoForeignKeyDialect
+logging:
+  level:
+    root: INFO
+    org.springframework: info

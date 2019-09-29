@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public interface BalanceRemoteService {
 
     @ApiOperation("查询账户")
-    @PutMapping("payment/balance/recharge")
+    @PutMapping("payment/balance/query")
     Response<BalanceDTO> query(@AuthenticationPrincipal Jwt jwt);
 
 
