@@ -11,8 +11,26 @@
 
     <artifactId>cloudrs-gateway</artifactId>
 
+    <properties>
+        <cloudrs-common.version>1.0-SNAPSHOT</cloudrs-common.version>
+    </properties>
+
 
     <dependencies>
+        <!--项目依赖-->
+        <dependency>
+            <groupId>io.github.chengmboy</groupId>
+            <artifactId>cloudrs-common</artifactId>
+            <version>${cloudrs-common.version}</version>
+        </dependency>
+
+        <!--db-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
@@ -21,6 +39,21 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 

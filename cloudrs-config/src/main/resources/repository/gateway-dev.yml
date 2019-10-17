@@ -3,9 +3,9 @@ server:
 
 zuul:
   routes:
-    api-a:
-      path: /api-1/**
-      serviceId: server1
-    api-b:
-      path: /api-2/**
-      serviceId: server2
+    api-auth:
+      path: /auth/**
+      serviceId: auth
+    api-payment:
+      path: /payment/**
+      serviceId: payment

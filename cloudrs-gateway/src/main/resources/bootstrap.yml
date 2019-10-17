@@ -1,6 +1,11 @@
 spring:
   application:
     name: gateway
+  datasource:
+    url: jdbc:mysql://mysql.cloudrs:3306/auth?useUnicode=true&characterEncoding=utf-8&&useSSL=false&&serverTimezone=Asia/Shanghai&&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
   cloud:
     config:
       discovery:
@@ -11,6 +16,15 @@ spring:
   profiles:
     active: dev
 
+security:
+  oauth2:
+    client:
+      client-id: cloudrs
+      client-secret: 123456
+    resource:
+      jwt:
+        key-uri: http://localhost:8764/oauth/token_key
+
 eureka:
   client:
     serviceUrl:
@@ -19,4 +33,4 @@ eureka:
 logging:
   level:
     root: INFO
-    org.springframework: info
+    org.springframework: debug

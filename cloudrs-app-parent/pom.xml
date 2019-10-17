@@ -17,7 +17,7 @@
         <module>cloudrs-passport</module>
         <module>cloudrs-order</module>
         <module>cloudrs-resource</module>
-        <module>cloudrs-auth</module>
+        <module>cloudrs-uc</module>
     </modules>
 
     <properties>

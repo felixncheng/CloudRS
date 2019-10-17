@@ -2,16 +2,16 @@ package io.github.chengmboy.cloudrs.payment.controller;
 
 import java.math.BigDecimal;
 import io.github.chengmboy.cloudrs.common.exception.EntityAlreadyExistException;
+import io.github.chengmboy.cloudrs.common.util.UserUtils;
 import io.github.chengmboy.cloudrs.common.web.Response;
 import io.github.chengmboy.cloudrs.payment.api.BalanceRemoteService;
 import io.github.chengmboy.cloudrs.payment.api.dto.BalanceDTO;
 import io.github.chengmboy.cloudrs.payment.api.exception.OutOfMoneyException;
 import io.github.chengmboy.cloudrs.payment.service.BalanceService;
-import io.github.chengmboy.cloudrs.auth.api.UserRemoteService;
-import io.github.chengmboy.cloudrs.auth.api.dto.UserDTO;
+import io.github.chengmboy.cloudrs.uc.api.UserRemoteService;
+import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,11 +25,14 @@ public class BalanceController implements BalanceRemoteService {
     final UserRemoteService userRemoteService;
 
     @Override
-    public Response<BalanceDTO> query(Jwt jwt) {
-        String loginName = jwt.getSubject();
-        UserDTO user = userRemoteService.getByLoginName(loginName);
+    public Response<String> query() {
+//        String loginName = jwt.getSubject();
+        /*UserDTO user = userRemoteService.getByLoginName(loginName);
         BalanceDTO balance = balanceService.query(user.getId());
-        return Response.ok(balance);
+        return Response.ok(balance);*/
+        String name=UserUtils.getUser();
+        UserDTO user = userRemoteService.getByLoginName(name);
+        return Response.ok(String.format("Hello, %s!, id: %s", user.getName(),user.getId()));
     }
 
     @Override

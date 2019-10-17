@@ -29,8 +29,8 @@ import java.util.Map;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
-import io.github.chengmboy.cloudrs.auth.api.UserRemoteService;
-import io.github.chengmboy.cloudrs.auth.api.dto.UserDTO;
+import io.github.chengmboy.cloudrs.uc.api.UserRemoteService;
+import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

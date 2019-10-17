@@ -16,7 +16,10 @@ eureka:
     serviceUrl:
       defaultZone: http://register-node1.cloudrs:9991/eureka/
 
+
 logging:
   level:
     root: INFO
     org.springframework: info
+server:
+  port: 8765

@@ -11,8 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,8 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public interface BalanceRemoteService {
 
     @ApiOperation("查询账户")
-    @PutMapping("payment/balance/query")
-    Response<BalanceDTO> query(@AuthenticationPrincipal Jwt jwt);
+    @GetMapping("payment/balance/query")
+    Response<String> query();
 
 
     @ApiOperation("充值金额")

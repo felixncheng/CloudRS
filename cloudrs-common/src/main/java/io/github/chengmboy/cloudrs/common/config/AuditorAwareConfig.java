@@ -1,3 +1,4 @@
+/*
 package io.github.chengmboy.cloudrs.common.config;
 
 import java.util.Optional;
@@ -13,9 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.jwt.Jwt;
 
+*/
 /**
  * @author cheng_mboy
- */
+ *//*
+
 @Configuration
 @EnableJpaAuditing
 @Slf4j
@@ -44,3 +47,4 @@ public class AuditorAwareConfig {
         }
     }
 }
+*/

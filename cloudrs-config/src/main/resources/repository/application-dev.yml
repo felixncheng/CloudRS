@@ -15,8 +15,3 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: io.github.chengmboy.cloudrs.common.mysql.MySQL57InnodbNoForeignKeyDialect
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://localhost:8764/.well-known/jwks.json

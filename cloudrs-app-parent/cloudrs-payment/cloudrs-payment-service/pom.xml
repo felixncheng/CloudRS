@@ -27,9 +27,10 @@
 
         <dependency>
             <groupId>io.github.chengmboy</groupId>
-            <artifactId>cloudrs-auth-service-remote-api</artifactId>
+            <artifactId>cloudrs-uc-service-remote-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
 
     </dependencies>
 </project>

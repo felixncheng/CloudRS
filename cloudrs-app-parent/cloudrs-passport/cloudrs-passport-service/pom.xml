@@ -26,8 +26,15 @@
         <!-- 项目依赖 -->
         <dependency>
             <groupId>io.github.chengmboy</groupId>
-            <artifactId>cloudrs-auth-service-remote-api</artifactId>
+            <artifactId>cloudrs-uc-service-remote-api</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+            <version>5.1.6.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
