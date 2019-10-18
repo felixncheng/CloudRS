@@ -1,6 +1,7 @@
 package io.github.chengmboy.auth.util;
 
 
+import io.github.chengmboy.cloudrs.uc.api.dto.RoleDTO;
 import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import io.github.chengmboy.cloudrs.common.constants.CommonConstant;
 import io.github.chengmboy.cloudrs.common.constants.SecurityConstants;
@@ -20,25 +21,25 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private String status;
-    private List<String> roleVoList;
+    private List<RoleDTO> roleVoList;
 
     public UserDetailsImpl() {
 
     }
 
-    public UserDetailsImpl(UserDTO memberVo) {
-        this.userId = memberVo.getId();
-        this.username = memberVo.getName();
-        this.password = memberVo.getPassword();
-        this.status = "0";
-        roleVoList = Arrays.asList("USER");
+    public UserDetailsImpl(UserDTO user) {
+        this.userId = user.getId();
+        this.username = user.getName();
+        this.password = user.getPassword();
+        this.status = user.getStatus()?"0":"1";
+        roleVoList = user.getRoles();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (String roleVo : roleVoList) {
-            authorityList.add(new SimpleGrantedAuthority(roleVo));
+        for (RoleDTO roleDTO : roleVoList) {
+            authorityList.add(new SimpleGrantedAuthority(roleDTO.getRoleCode()));
         }
         authorityList.add(new SimpleGrantedAuthority(SecurityConstants.BASE_ROLE));
         return authorityList;
@@ -86,11 +87,11 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public List<String> getRoleVoList() {
+    public List<RoleDTO> getRoleVoList() {
         return roleVoList;
     }
 
-    public void setRoleVoList(List<String> roleVoList) {
+    public void setRoleVoList(List<RoleDTO> roleVoList) {
         this.roleVoList = roleVoList;
     }
 

@@ -13,6 +13,7 @@
 
     <properties>
         <cloudrs-common.version>1.0-SNAPSHOT</cloudrs-common.version>
+        <cloudrs-uc-service-remote-api.version>1.0-SNAPSHOT</cloudrs-uc-service-remote-api.version>
     </properties>
 
 
@@ -22,6 +23,12 @@
             <groupId>io.github.chengmboy</groupId>
             <artifactId>cloudrs-common</artifactId>
             <version>${cloudrs-common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.chengmboy</groupId>
+            <artifactId>cloudrs-uc-service-remote-api</artifactId>
+            <version>${cloudrs-uc-service-remote-api.version}</version>
         </dependency>
 
         <!--db-->

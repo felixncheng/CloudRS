@@ -9,3 +9,6 @@ zuul:
     api-payment:
       path: /payment/**
       serviceId: payment
+    api-uc:
+      path: /uc/**
+      serviceId: uc

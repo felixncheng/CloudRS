@@ -10,6 +10,8 @@ spring:
       profile: ${spring.profiles.active}
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
 
 eureka:
   client:

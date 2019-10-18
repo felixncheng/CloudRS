@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"io.github.chengmboy.cloudrs"})
 @SpringBootApplication
 @EnableSwagger2
 public class AuthServiceApplication {

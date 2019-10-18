@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("uc")
 public interface UserRemoteService {
 
-    @GetMapping("auth/user/login/{loginName}")
+    @GetMapping("/user/login/{loginName}")
     UserDTO getByLoginName(@PathVariable("loginName") String loginName);
 }

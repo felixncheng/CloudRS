@@ -1,6 +1,9 @@
 package io.github.chengmboy.cloudrs.gateway.service.impl;
 
 import io.github.chengmboy.cloudrs.gateway.service.CloudrsPermissionService;
+import io.github.chengmboy.cloudrs.uc.api.PermissionRemoteService;
+import io.github.chengmboy.cloudrs.uc.api.dto.PermissionDTO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -18,39 +21,35 @@ import java.util.Set;
 
 @Slf4j
 @Service("CloudrsPermissionService")
+@RequiredArgsConstructor
 public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
-/*
-    @Autowired
-    private RemotePermissionService remotePermissionService;
-*/
+
+    private final PermissionRemoteService permissionRemoteService;
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
     public boolean hasPermission(HttpServletRequest request, Authentication authentication) {
-        //ele-mps options 跨域配置，现在处理是通过前端配置代理，不使用这种方式，存在风险
-//        if (HttpMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
-//            return true;
-//        }
+
         Object principal = authentication.getPrincipal();
         List<SimpleGrantedAuthority> grantedAuthorityList = (List<SimpleGrantedAuthority>) authentication.getAuthorities();
         boolean hasPermission = false;
-/*
+
         if (principal != null) {
             if (CollectionUtils.isEmpty(grantedAuthorityList)) {
                 log.warn("角色列表为空：{}", authentication.getPrincipal());
                 return hasPermission;
             }
 
-            Set<PermissionVO> permissionS = new HashSet<>();
+            Set<PermissionDTO> permissionS = new HashSet<>();
             for (SimpleGrantedAuthority authority : grantedAuthorityList) {
-                    Set<PermissionVO> permissionVOSet = remotePermissionService.findPermissionByRole(authority.getAuthority());
+                    Set<PermissionDTO> permissionVOSet = permissionRemoteService.findPermissionByRoleCode(authority.getAuthority());
                     if (CollectionUtils.isNotEmpty(permissionVOSet)) {
                         permissionS.addAll(permissionVOSet);
                 }
             }
 
-            for (PermissionVO permission : permissionS) {
+            for (PermissionDTO permission : permissionS) {
                 if (permission!=null&&!StringUtils.isBlank(permission.getUrl())
                         && antPathMatcher.match(permission.getUrl(), request.getRequestURI())
                         ) {
@@ -61,7 +60,7 @@ public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
                     }
                 }
             }
-        }*/
-        return true;
+        }
+        return hasPermission;
     }
 }

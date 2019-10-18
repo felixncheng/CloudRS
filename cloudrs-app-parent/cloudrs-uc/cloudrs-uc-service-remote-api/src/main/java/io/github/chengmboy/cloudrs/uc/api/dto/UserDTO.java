@@ -2,6 +2,8 @@ package io.github.chengmboy.cloudrs.uc.api.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author cheng_mboy
  */
@@ -18,5 +20,7 @@ public class UserDTO {
 
     private String password;
 
-    private String roles;
+    private List<RoleDTO> roles;
+
+    private Boolean status;
 }

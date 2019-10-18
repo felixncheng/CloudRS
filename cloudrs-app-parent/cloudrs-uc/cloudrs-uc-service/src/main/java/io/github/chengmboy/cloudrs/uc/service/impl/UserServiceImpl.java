@@ -38,10 +38,6 @@ public class UserServiceImpl implements UserService {
     public UserDTO getByLoginName(String loginName) {
         User user = userRepository.findByLoginName(loginName);
         UserDTO userDTO = new UserDTO();
-        user = new User();
-        user.setId(123L);
-        user.setName(UserUtils.getUser());
-        user.setPassword("{bcrypt}$2a$10$YCnmdlVnNsXdxR8t7glNeO5lPlDpbEijuFHrkcT13KcbqXsEVUqAC");
         BeanUtils.copyProperties(user, userDTO);
         return userDTO;
     }

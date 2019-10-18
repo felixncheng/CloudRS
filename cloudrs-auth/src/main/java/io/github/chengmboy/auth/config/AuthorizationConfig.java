@@ -1,10 +1,6 @@
 package io.github.chengmboy.auth.config;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.chengmboy.auth.util.UserDetailsImpl;
-import io.github.chengmboy.auth.util.jackson2.AuthJackson2Module;
 import io.github.chengmboy.cloudrs.common.constants.CommonConstant;
 import io.github.chengmboy.cloudrs.common.constants.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.jackson2.CoreJackson2Module;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -32,7 +23,6 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import org.springframework.security.web.jackson2.WebJackson2Module;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -77,10 +67,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
         endpoints
                 .tokenStore(redisTokenStore())
-                //.tokenStore(new RedisTokenStore(jedisConnectionFactory))
                 .tokenEnhancer(tokenEnhancerChain)
                 .authenticationManager(authenticationManager)
-//                .reuseRefreshTokens(false)
                 .userDetailsService(userDetailsService)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }
@@ -97,27 +85,9 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        AccessTokenConverter jwtAccessTokenConverter = new AccessTokenConverter();
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(CommonConstant.SIGN_KEY);
         return jwtAccessTokenConverter;
-    }
-
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new CoreJackson2Module());
-        mapper.registerModule(new WebJackson2Module());
-        mapper.registerModule(new AuthJackson2Module());
-        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
-        mapper.disable(MapperFeature.AUTO_DETECT_SETTERS);
-        RedisSerializer rs = new GenericJackson2JsonRedisSerializer(mapper);
-        //template.setDefaultSerializer(new Jackson2JsonRedisSerializer(Object.class));
-        template.setDefaultSerializer(rs);
-        return template;
     }
 
     /**
@@ -131,9 +101,6 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public TokenStore redisTokenStore() {
 
-        /*VoleRedisTokenStore tokenStore = new VoleRedisTokenStore();
-        tokenStore.setRedisTemplate(redisTemplate(redisConnectionFactory));
-        */
         return new RedisTokenStore(redisConnectionFactory);
     }
 
@@ -146,7 +113,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     public TokenEnhancer tokenEnhancer() {
         return (accessToken, authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(2);
-            additionalInfo.put("license", SecurityConstants.Vole_LICENSE);
+            additionalInfo.put("license", SecurityConstants.Cloudrs_LICENSE);
             UserDetailsImpl user = (UserDetailsImpl) authentication.getUserAuthentication().getPrincipal();
             if (user != null) {
                 additionalInfo.put("userId", user.getUserId());
