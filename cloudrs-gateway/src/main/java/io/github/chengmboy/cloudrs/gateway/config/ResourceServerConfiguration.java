@@ -38,6 +38,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.headers().frameOptions().disable();
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .authorizeRequests();
+        registry.antMatchers("/auth/**").permitAll();
 //        filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
         registry.anyRequest().access("@CloudrsPermissionService.hasPermission(request,authentication)");
     }
