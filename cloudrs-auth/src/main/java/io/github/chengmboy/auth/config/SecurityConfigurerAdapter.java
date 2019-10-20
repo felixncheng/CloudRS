@@ -26,23 +26,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
-                http
-//                        .exceptionHandling().accessDeniedHandler(new AuthAccessDeniedHandler())
-//                        .authenticationEntryPoint(new AuthAuthenticationEntryPoint())
-//                        .and()
-                        .formLogin().loginPage("/authentication/require")
-                        .loginProcessingUrl("/authentication/form")
-                        //.successHandler(new AuthAuthenticationSuccessHandler())
-                        .failureHandler(new AuthAuthenticationFailureHandler())
-                        .and()
-                        .logout().logoutUrl("/logout")
-                        .logoutSuccessHandler(new AuthLogoutSuccessHandler())
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .deleteCookies("vole")
-                        .and()
-                        .authorizeRequests();
+                http.authorizeRequests();
 //        filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
         registry.anyRequest().authenticated()
                 .and()
@@ -55,27 +39,6 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    // password 方案一：明文存储，用于测试，不能用于生产
-//        @Bean
-//        PasswordEncoder passwordEncoder(){
-//            return NoOpPasswordEncoder.getInstance();
-//        }
-
-    // password 方案二：用 BCrypt 对密码编码
-    //    @Bean
-    //    PasswordEncoder passwordEncoder(){
-    //        return new BCryptPasswordEncoder();
-    //    }
-
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        DelegatingPasswordEncoder delegatingPasswordEncoder =
-                (DelegatingPasswordEncoder)  PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        return delegatingPasswordEncoder;
-
-
     }
 
 }

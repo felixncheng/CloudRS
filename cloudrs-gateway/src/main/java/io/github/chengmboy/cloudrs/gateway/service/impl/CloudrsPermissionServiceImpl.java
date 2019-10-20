@@ -1,13 +1,12 @@
 package io.github.chengmboy.cloudrs.gateway.service.impl;
 
 import io.github.chengmboy.cloudrs.gateway.service.CloudrsPermissionService;
-import io.github.chengmboy.cloudrs.uc.api.PermissionRemoteService;
+import io.github.chengmboy.cloudrs.uc.api.UcRemoteService;
 import io.github.chengmboy.cloudrs.uc.api.dto.PermissionDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
 
-    private final PermissionRemoteService permissionRemoteService;
+    private final UcRemoteService ucRemoteService;
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -43,7 +42,7 @@ public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
 
             Set<PermissionDTO> permissionS = new HashSet<>();
             for (SimpleGrantedAuthority authority : grantedAuthorityList) {
-                    Set<PermissionDTO> permissionVOSet = permissionRemoteService.findPermissionByRoleCode(authority.getAuthority());
+                    Set<PermissionDTO> permissionVOSet = ucRemoteService.findPermissionByRoleCode(authority.getAuthority());
                     if (CollectionUtils.isNotEmpty(permissionVOSet)) {
                         permissionS.addAll(permissionVOSet);
                 }

@@ -8,11 +8,6 @@ spring:
             server:
                 native:
                     search-locations: classpath:/repository
-    rabbitmq:
-        host: rabbitmq-node1.cloudrs
-        password: guest
-        port: 5672
-        username: guest
     profiles:
         active: native
 

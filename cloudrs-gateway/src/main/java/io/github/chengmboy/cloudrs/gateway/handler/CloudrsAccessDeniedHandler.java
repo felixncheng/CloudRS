@@ -17,13 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * 授权拒绝处理器，覆盖默认的OAuth2AccessDeniedHandler
- * 包装失败信息到VoleDeniedException
- */
+
 @Slf4j
 @Component
-public class VoleAccessDeniedHandler extends OAuth2AccessDeniedHandler {
+public class CloudrsAccessDeniedHandler extends OAuth2AccessDeniedHandler {
     @Autowired
     private ObjectMapper objectMapper;
 

@@ -10,10 +10,11 @@ spring:
      password: guest
      port: 5672
      username: guest
+  redis:
+    host: 127.0.0.1
+    port: 6379
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     database-platform: io.github.chengmboy.cloudrs.common.mysql.MySQL57InnodbNoForeignKeyDialect
-  main:
-    allow-bean-definition-overriding: true

@@ -8,7 +8,7 @@ import io.github.chengmboy.cloudrs.payment.api.BalanceRemoteService;
 import io.github.chengmboy.cloudrs.payment.api.dto.BalanceDTO;
 import io.github.chengmboy.cloudrs.payment.api.exception.OutOfMoneyException;
 import io.github.chengmboy.cloudrs.payment.service.BalanceService;
-import io.github.chengmboy.cloudrs.uc.api.UserRemoteService;
+import io.github.chengmboy.cloudrs.uc.api.UcRemoteService;
 import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class BalanceController implements BalanceRemoteService {
 
     final BalanceService balanceService;
-    final UserRemoteService userRemoteService;
+    final UcRemoteService ucRemoteService;
 
     @Override
     public Response<String> query() {
@@ -31,7 +31,7 @@ public class BalanceController implements BalanceRemoteService {
         BalanceDTO balance = balanceService.query(user.getId());
         return Response.ok(balance);*/
         String name=UserUtils.getUser();
-        UserDTO user = userRemoteService.getByLoginName(name);
+        UserDTO user = ucRemoteService.getByLoginName(name);
         return Response.ok(String.format("Hello, %s!, id: %s", user.getName(),user.getId()));
     }
 

@@ -1,20 +1,15 @@
-
-
-server:
-  port: 8764
-
 spring:
   application:
     name: auth
-  datasource:
-    url: jdbc:mysql://mysql.cloudrs:3306/auth?useUnicode=true&characterEncoding=utf-8&&useSSL=false&&serverTimezone=Asia/Shanghai&&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-
-  redis:
-    host: 127.0.0.1
-    port: 6379
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: cloudrs-config
+      fail-fast: true
+      profile: ${spring.profiles.active}
+  profiles:
+    active: dev
 
 eureka:
   client:

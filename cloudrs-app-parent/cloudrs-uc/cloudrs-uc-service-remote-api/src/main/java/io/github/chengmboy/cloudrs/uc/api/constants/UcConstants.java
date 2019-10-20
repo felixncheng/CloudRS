@@ -3,7 +3,7 @@ package io.github.chengmboy.cloudrs.uc.api.constants;
 /**
  * @author cheng_mboy
  */
-public class AuthConstants {
+public class UcConstants {
 
-    public static final String Auth = "auth";
+    public static final String Uc = "uc";
 }

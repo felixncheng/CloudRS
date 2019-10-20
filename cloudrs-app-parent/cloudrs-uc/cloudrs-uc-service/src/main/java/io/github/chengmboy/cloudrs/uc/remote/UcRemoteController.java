@@ -1,23 +1,30 @@
 package io.github.chengmboy.cloudrs.uc.remote;
 
-import io.github.chengmboy.cloudrs.uc.api.PermissionRemoteService;
+import io.github.chengmboy.cloudrs.uc.api.UcRemoteService;
 import io.github.chengmboy.cloudrs.uc.api.dto.PermissionDTO;
+import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import io.github.chengmboy.cloudrs.uc.pojo.entity.Permission;
 import io.github.chengmboy.cloudrs.uc.pojo.entity.Role;
 import io.github.chengmboy.cloudrs.uc.pojo.repository.RoleRepository;
+import io.github.chengmboy.cloudrs.uc.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+
 @RestController
 @RequiredArgsConstructor
-public class PermissionRemoteController implements PermissionRemoteService {
+public class UcRemoteController implements UcRemoteService {
+
 
     private final RoleRepository roleRepository;
+    private final UserService userService;
     @Override
     public Set<PermissionDTO> findPermissionByRoleCode(String roleCode) {
 
@@ -32,5 +39,12 @@ public class PermissionRemoteController implements PermissionRemoteService {
             }
         }
         return permissionDTOS;
+    }
+
+
+
+    @Override
+    public UserDTO getByLoginName(@PathVariable("loginName") String loginName) {
+        return userService.getByLoginName(loginName);
     }
 }
