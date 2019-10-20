@@ -28,6 +28,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
                 http.authorizeRequests();
 //        filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
+        registry.antMatchers("/actuator/**").permitAll();
         registry.anyRequest().authenticated()
                 .and()
                 .csrf().disable();

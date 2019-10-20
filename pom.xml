@@ -15,6 +15,7 @@
         <module>cloudrs-config</module>
         <module>cloudrs-app-parent</module>
         <module>cloudrs-auth</module>
+        <module>cloudrs-monitor</module>
     </modules>
 
 

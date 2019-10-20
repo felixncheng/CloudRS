@@ -1,5 +1,6 @@
 package io.github.chengmboy.cloudrs.gateway.service.impl;
 
+import io.github.chengmboy.cloudrs.common.util.IpHelper;
 import io.github.chengmboy.cloudrs.gateway.service.CloudrsPermissionService;
 import io.github.chengmboy.cloudrs.uc.api.UcRemoteService;
 import io.github.chengmboy.cloudrs.uc.api.dto.PermissionDTO;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,8 @@ public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
 
     private final UcRemoteService ucRemoteService;
 
+    private final DiscoveryClient discoveryClient;
+
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
@@ -33,6 +38,19 @@ public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
         Object principal = authentication.getPrincipal();
         List<SimpleGrantedAuthority> grantedAuthorityList = (List<SimpleGrantedAuthority>) authentication.getAuthorities();
         boolean hasPermission = false;
+
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUDRS-MONITOR");
+        String ip = IpHelper.getIpAddr(request);
+        boolean monitor = false;
+        for (ServiceInstance instance : instances) {
+            if (instance.getHost().equalsIgnoreCase(ip)) {
+                monitor=true;
+            }
+        }
+
+        if (monitor) {
+            return true;
+        }
 
         if (principal != null) {
             if (CollectionUtils.isEmpty(grantedAuthorityList)) {

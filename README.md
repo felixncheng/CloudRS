@@ -9,3 +9,4 @@
 * 统一配置中心
 * CI/CD
 * spring cloud OAuth2
+* spring admin
