@@ -1,4 +1,4 @@
-package io.github.chengmboy.auth.util;
+package io.github.chengmboy.cloudrs.auth.util;
 
 
 import io.github.chengmboy.cloudrs.uc.api.dto.RoleDTO;

@@ -5,5 +5,5 @@ package io.github.chengmboy.cloudrs.payment.api.constants;
  */
 public class PaymentConstants {
 
-    public static final String Payment = "payment";
+    public static final String CloudRsPayment = "cloudrs-payment";
 }

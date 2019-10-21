@@ -18,16 +18,16 @@ security:
       client-secret: 123456
     resource:
       jwt:
-        key-uri: ${auth.server}/oauth/token_key
+        key-uri: http://localhost:8764/oauth/token_key
 
 zuul:
   routes:
     api-auth:
       path: /auth/**
-      serviceId: auth
+      serviceId: cloudrs-auth
     api-payment:
       path: /payment/**
-      serviceId: payment
+      serviceId: cloudrs-payment
     api-uc:
       path: /uc/**
-      serviceId: uc
+      serviceId: cloudrs-uc

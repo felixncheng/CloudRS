@@ -16,6 +16,7 @@
         <module>cloudrs-app-parent</module>
         <module>cloudrs-auth</module>
         <module>cloudrs-monitor</module>
+        <module>cloudrs-turbine</module>
     </modules>
 
 

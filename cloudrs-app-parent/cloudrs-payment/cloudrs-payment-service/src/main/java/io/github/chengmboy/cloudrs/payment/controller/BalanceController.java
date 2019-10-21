@@ -32,6 +32,9 @@ public class BalanceController implements BalanceRemoteService {
         return Response.ok(balance);*/
         String name=UserUtils.getUser();
         UserDTO user = ucRemoteService.getByLoginName(name);
+        if (user == null) {
+            return Response.ok("Hello anonymous user");
+        }
         return Response.ok(String.format("Hello, %s!, id: %s", user.getName(),user.getId()));
     }
 

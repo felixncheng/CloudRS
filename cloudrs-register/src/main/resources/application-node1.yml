@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: register-node1
+    name: cloudrs-register-node1
 
 eureka:
   instance:

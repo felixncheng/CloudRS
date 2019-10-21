@@ -19,6 +19,10 @@ spring:
     show-sql: true
     database-platform: io.github.chengmboy.cloudrs.common.mysql.MySQL57InnodbNoForeignKeyDialect
 
+feign:
+  hystrix:
+    enabled: true
+
 management:
   endpoints:
     web:

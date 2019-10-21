@@ -1,4 +1,4 @@
-package io.github.chengmboy.auth.util.message;
+package io.github.chengmboy.cloudrs.auth.util.message;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

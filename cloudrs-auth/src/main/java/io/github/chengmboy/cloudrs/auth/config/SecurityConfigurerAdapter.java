@@ -1,20 +1,14 @@
-package io.github.chengmboy.auth.config;
+package io.github.chengmboy.cloudrs.auth.config;
 
 
-import io.github.chengmboy.auth.util.message.AuthAuthenticationFailureHandler;
-import io.github.chengmboy.auth.util.message.AuthLogoutSuccessHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.chengmboy.cloudrs.auth.util.message.AuthAuthenticationFailureHandler;
+import io.github.chengmboy.cloudrs.auth.util.message.AuthLogoutSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.annotation.Resource;
 
 @EnableWebSecurity
 public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {

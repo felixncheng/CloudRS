@@ -1,7 +1,7 @@
-package io.github.chengmboy.auth.service;
+package io.github.chengmboy.cloudrs.auth.service;
 
 
-import io.github.chengmboy.auth.util.UserDetailsImpl;
+import io.github.chengmboy.cloudrs.auth.util.UserDetailsImpl;
 import io.github.chengmboy.cloudrs.uc.api.UcRemoteService;
 import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import lombok.RequiredArgsConstructor;

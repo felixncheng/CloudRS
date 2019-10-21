@@ -1,4 +1,4 @@
-package io.github.chengmboy.auth.util;
+package io.github.chengmboy.cloudrs.auth.util;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: payment
+    name: cloudrs-payment
   cloud:
     config:
       discovery:

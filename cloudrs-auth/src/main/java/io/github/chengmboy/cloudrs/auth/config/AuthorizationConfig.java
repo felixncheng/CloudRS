@@ -1,6 +1,6 @@
-package io.github.chengmboy.auth.config;
+package io.github.chengmboy.cloudrs.auth.config;
 
-import io.github.chengmboy.auth.util.UserDetailsImpl;
+import io.github.chengmboy.cloudrs.auth.util.UserDetailsImpl;
 import io.github.chengmboy.cloudrs.common.constants.CommonConstant;
 import io.github.chengmboy.cloudrs.common.constants.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;

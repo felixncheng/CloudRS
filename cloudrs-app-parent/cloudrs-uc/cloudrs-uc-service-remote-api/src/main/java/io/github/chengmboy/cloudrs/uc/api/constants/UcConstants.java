@@ -5,5 +5,5 @@ package io.github.chengmboy.cloudrs.uc.api.constants;
  */
 public class UcConstants {
 
-    public static final String Uc = "uc";
+    public static final String CloudRsUc = "cloudrs-uc";
 }

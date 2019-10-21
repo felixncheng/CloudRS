@@ -1,6 +1,6 @@
 spring:
   application:
-    name: auth
+    name: cloudrs-auth
   cloud:
     config:
       discovery:

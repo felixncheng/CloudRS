@@ -1,4 +1,4 @@
-package monitor;
+package io.github.chengmboy.monitor;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +17,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableAdminServer        // 启用Admin模块
 @EnableDiscoveryClient    // 用于服务注册和发现
 @SpringBootApplication
-public class CloudrsMonitorApplication {
+public class MonitorApplication {
 
     public static void main(String[] args) {
-        log.debug("VoleMonitorApplication startup main");
-        SpringApplication application = new SpringApplication(CloudrsMonitorApplication.class);
+        SpringApplication application = new SpringApplication(MonitorApplication.class);
         application.setBannerMode(Banner.Mode.OFF);
         application.run(args);
     }

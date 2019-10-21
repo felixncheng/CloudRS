@@ -1,4 +1,4 @@
-package monitor.config;
+package io.github.chengmboy.monitor.config;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import org.springframework.context.annotation.Configuration;
