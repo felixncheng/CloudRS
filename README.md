@@ -11,4 +11,4 @@
 * spring cloud OAuth2
 * spring admin 系统监控
 * turbine断路器聚合监控
-* zipkin调用链追踪分析
+* zipkin调用链监控

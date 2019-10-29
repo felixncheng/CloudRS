@@ -11,6 +11,4 @@ spring:
 logging:
   level:
     root: INFO
-    org.springframework.security: DEBUG
-#  zipkin:
-#    base-url: http://localhost:9412/ # 指定了 Zipkin 服务器的地址
+    org.springframework.security: info
