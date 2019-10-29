@@ -12,6 +12,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     #serviceUrl:
       #defaultZone: http://register-node2.cloudrs:9992/eureka/,http://register-node3.cloudrs:9993/eureka/
   server:

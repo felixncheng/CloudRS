@@ -12,7 +12,7 @@
     <artifactId>cloudrs-monitor</artifactId>
 
     <properties>
-        <spring-boot-admin.version>2.1.0</spring-boot-admin.version>
+        <spring-boot-admin.version>2.1.6</spring-boot-admin.version>
     </properties>
 
     <dependencies>

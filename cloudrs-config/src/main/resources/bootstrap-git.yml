@@ -19,8 +19,3 @@ spring:
                 git:
                     searchPaths: cloudrs
                     uri: https://github.com/chengmboy/springcloud-config
-    rabbitmq:
-        host: rabbitmq-node1.cloudrs
-        password: guest
-        port: 5672
-        username: guest

@@ -4,9 +4,11 @@
 ## Features
 * 服务注册与发现
 * 服务调用
-* 链路日志
+* 链路追踪日志
 * 服务网关
 * 统一配置中心
 * CI/CD
 * spring cloud OAuth2
-* spring admin
+* spring admin 系统监控
+* turbine断路器聚合监控
+* zipkin调用链追踪分析
