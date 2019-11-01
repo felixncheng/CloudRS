@@ -8,7 +8,7 @@ spring:
 
 eureka:
   instance:
-    hostname: register-node1
+    hostname: cloudrs-register
   client:
     registerWithEureka: false
     fetchRegistry: false

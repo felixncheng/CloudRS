@@ -15,7 +15,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://register-node1.cloudrs:9991/eureka/
+      defaultZone: http://cloudrs-register:9991/eureka/
 
 logging:
   level:

@@ -1,0 +1,6 @@
+FROM java:8-jre-alpine
+
+ADD ./jar/cloudrs-register.jar /app/
+CMD ["java", "-Xmx200m", "-jar", "/app/cloudrs-register.jar"]
+
+EXPOSE 9991

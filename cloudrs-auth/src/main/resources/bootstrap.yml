@@ -6,15 +6,17 @@ spring:
       discovery:
         enabled: true
         serviceId: cloudrs-config
-      fail-fast: true
       profile: ${spring.profiles.active}
+      retry:
+        max-attempts: 10
+        initial-interval: 5000
   profiles:
     active: dev
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://register-node1.cloudrs:9991/eureka/
+      defaultZone: http://cloudrs-register:9991/eureka/
 
 logging:
   level:

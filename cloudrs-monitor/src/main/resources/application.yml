@@ -5,6 +5,10 @@ spring:
     user:
       name: admin
       password: admin
+  rabbitmq:
+    addresses: rabbit1:5672,rabbit2:5672,rabbit3:5672
+    username: cheng
+    password: 123456
 
 #>>>>>>>>>>>>邮件报警（微服务up or down时）
 # qq 邮箱需要 开启smtp 服务
@@ -46,8 +50,9 @@ eureka:
     # 表示eureka client间隔多久去拉取服务注册信息，默认为30秒
     registryFetchIntervalSeconds: 5
     service-url:
-      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:9991}/eureka/
+      defaultZone: ${EUREKA_SERVICE_URL:http://cloudrs-register:9991}/eureka/
   instance:
+    prefer-ip-address: true
     # 表示eureka client发送心跳给server端的频率，默认为30秒
     leaseRenewalIntervalInSeconds: 20
 #     健康检查的地址（依赖spring-boot-starter-actuator）

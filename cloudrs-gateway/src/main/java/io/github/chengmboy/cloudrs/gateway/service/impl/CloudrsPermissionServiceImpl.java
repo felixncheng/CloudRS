@@ -41,6 +41,7 @@ public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
 
         List<ServiceInstance> instances = discoveryClient.getInstances("CLOUDRS-MONITOR");
         String ip = IpHelper.getIpAddr(request);
+        log.info("CLOUDRS-MONITOR ip {} ,request ip {}",instances.get(0).getHost(),ip);
         boolean monitor = false;
         for (ServiceInstance instance : instances) {
             if (instance.getHost().equalsIgnoreCase(ip)) {

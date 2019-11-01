@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: cloudrs-turbine
+  rabbitmq:
+    addresses: rabbit1:5672,rabbit2:5672,rabbit3:5672
+    username: cheng
+    password: 123456
 
 eureka:
   instance:
@@ -13,7 +17,7 @@ eureka:
     health-check-url-path: /actuator/health
   client:
     serviceUrl:
-      defaultZone: http://localhost:9991/eureka/
+      defaultZone: http://cloudrs-register:9991/eureka/
 management:
   endpoints:
     web:

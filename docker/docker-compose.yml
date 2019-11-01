@@ -1,0 +1,144 @@
+version: '2'
+services:
+  cloudrs-register:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-register
+    restart: always
+    ports:
+      - 9992:9991
+
+  cloudrs-config:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-config
+    restart: always
+
+  cloudrs-auth:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-auth
+    restart: always
+
+  cloudrs-gateway:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-gateway
+    restart: always
+    ports:
+      - 8080:8080
+
+  cloudrs-uc:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-uc
+    restart: always
+
+  cloudrs-payment:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-payment
+    restart: always
+
+  cloudrs-monitor:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-monitor
+    restart: always
+    ports:
+      - 9000:9000
+
+  cloudrs-turbine:
+    networks:
+      - cloudrs-net
+    build:
+      context: ./
+      dockerfile: Dockerfile-turbine
+    restart: always
+    ports:
+      - 8600:8600
+
+  rabbit1:
+    image: bijukunjummen/rabbitmq-server:3.7.0
+    hostname: rabbit1
+    networks:
+      - cloudrs-net
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=cheng
+      - RABBITMQ_DEFAULT_PASS=123456
+
+  rabbit2:
+    image: bijukunjummen/rabbitmq-server:3.7.0
+    hostname: rabbit2
+    networks:
+      - cloudrs-net
+    environment:
+      - CLUSTERED=true
+      - CLUSTER_WITH=rabbit1
+      - RAM_NODE=true
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+
+  rabbit3:
+    image: bijukunjummen/rabbitmq-server:3.7.0
+    hostname: rabbit3
+    networks:
+      - cloudrs-net
+    environment:
+      - CLUSTERED=true
+      - CLUSTER_WITH=rabbit1
+
+  redis-cluster:
+    image: grokzen/redis-cluster:5.0.5
+    networks:
+      - cloudrs-net
+
+  mysql-master:
+    image: mysql
+    volumes:
+      - ./mysql/config/master.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/init/master_init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    networks:
+      - cloudrs-net
+#
+#  mysql-slave:
+#    image: mysql
+#    volumes:
+#      - ./mysql/config/slave.cnf:/etc/mysql/conf.d/my.cnf
+#      - ./mysql/init/slave_init.sql:/docker-entrypoint-initdb.d/init.sql
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=slv
+#      - MYSQL_DATABASE=auth
+#      - MYSQL_USER=slv
+#      - MYSQL_PASSWORD=slv
+#    networks:
+#      - cloudrs-net
+
+
+networks:
+  cloudrs-net:
+
+
+
+
+

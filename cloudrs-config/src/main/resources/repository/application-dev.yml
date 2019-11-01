@@ -1,17 +1,16 @@
 spring:
   sleuth:
-      sampler:
-          probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
   zipkin:
     base-url: http://localhost:9411/ #/Applications/IntelliJ\ IDEA.app/Contents/jbr/Contents/Home/bin/java -jar zipkin-server-2.9.4-exec.jar --logging.level.zipkin2=debug --zipkin.collector.rabbitmq.addresses=localhost --zipkin.collector.rabbitmq.username=guest --zipkin.collector.rabbitmq.password=guest
   rabbitmq:
-     host: rabbitmq-node1.cloudrs
-     password: guest
-     port: 5672
-     username: guest
+    addresses: rabbit1:5672,rabbit2:5672,rabbit3:5672
+    username: cheng
+    password: 123456
   redis:
-    host: 127.0.0.1
-    port: 6379
+    cluster:
+      nodes: redis-cluster:7000,redis-cluster:7001,redis-cluster:7002,redis-cluster:7003,redis-cluster:7004,redis-cluster:7005
   jpa:
     hibernate:
       ddl-auto: update
