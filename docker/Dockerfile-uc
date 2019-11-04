@@ -1,14 +1,15 @@
-FROM java:8-jre-alpine
+FROM docker_java8dockerize
 
-RUN apk add --no-cache openssl
+ARG PINPOINT_VERSION
+ARG AGENT_ID
+ARG APP_NAME
+ENV APP_NAME ${APP_NAME}
+ENV JAVA_OPTS="-javaagent:/pinpoint-agent/pinpoint-bootstrap-${PINPOINT_VERSION}.jar -Dpinpoint.agentId=${AGENT_ID} -Dpinpoint.applicationName=${APP_NAME}"
 
-ENV DOCKERIZE_VERSION v0.6.1
-RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+COPY start.sh /usr/local/bin/
+RUN chmod a+x /usr/local/bin/start.sh
+
+ADD ./jar/${APP_NAME}.jar /app/
 
 
-ADD ./jar/cloudrs-uc-service.jar /app/
-
-
-ENTRYPOINT ["dockerize", "-timeout", "5m", "-wait", "http://cloudrs-register:9991/", "-wait", "http://cloudrs-config:8888/actuator/info","java", "-Xmx200m", "-jar", "/app/cloudrs-uc-service.jar"]
+ENTRYPOINT ["dockerize", "-timeout", "5m", "-wait", "http://cloudrs-register:9991/", "-wait", "http://cloudrs-config:8888/actuator/info","start.sh"]

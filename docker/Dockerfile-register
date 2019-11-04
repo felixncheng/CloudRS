@@ -1,6 +1,16 @@
-FROM java:8-jre-alpine
+FROM docker_java8dockerize
+
+ARG PINPOINT_VERSION
+ARG AGENT_ID
+ARG APP_NAME
+ENV APP_NAME ${APP_NAME}
+ENV JAVA_OPTS="-javaagent:/pinpoint-agent/pinpoint-bootstrap-${PINPOINT_VERSION}.jar -Dpinpoint.agentId=${AGENT_ID} -Dpinpoint.applicationName=${APP_NAME}"
+
+COPY start.sh /usr/local/bin/
+RUN chmod a+x /usr/local/bin/start.sh
+
 
 ADD ./jar/cloudrs-register.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/cloudrs-register.jar"]
+ENTRYPOINT ["start.sh"]
 
 EXPOSE 9991

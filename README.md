@@ -12,3 +12,4 @@
 * spring admin 系统监控
 * turbine断路器聚合监控
 * zipkin调用链监控
+* pinpoint监控

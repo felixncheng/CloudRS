@@ -1,60 +1,103 @@
-version: '2'
+version: '3'
 services:
   cloudrs-register:
     networks:
-      - cloudrs-net
+      - cloudrs
+      - pinpoint
     build:
       context: ./
       dockerfile: Dockerfile-register
+      args:
+        - PINPOINT_VERSION=${PINPOINT_VERSION}
+        - AGENT_ID=cloudrs-register-1
+        - APP_NAME=cloudrs-register
+    volumes:
+      - data-volume:/pinpoint-agent
     restart: always
     ports:
       - 9992:9991
 
   cloudrs-config:
     networks:
-      - cloudrs-net
+      - cloudrs
+      - pinpoint
     build:
       context: ./
       dockerfile: Dockerfile-config
+      args:
+        - PINPOINT_VERSION=${PINPOINT_VERSION}
+        - AGENT_ID=cloudrs-config-1
+        - APP_NAME=cloudrs-config
+    volumes:
+      - data-volume:/pinpoint-agent
     restart: always
+
 
   cloudrs-auth:
     networks:
-      - cloudrs-net
+      - cloudrs
+      - pinpoint
     build:
       context: ./
       dockerfile: Dockerfile-auth
+      args:
+        - PINPOINT_VERSION=${PINPOINT_VERSION}
+        - AGENT_ID=cloudrs-auth-1
+        - APP_NAME=cloudrs-auth
+    volumes:
+      - data-volume:/pinpoint-agent
     restart: always
 
   cloudrs-gateway:
     networks:
-      - cloudrs-net
+      - cloudrs
+      - pinpoint
     build:
       context: ./
       dockerfile: Dockerfile-gateway
+      args:
+        - PINPOINT_VERSION=${PINPOINT_VERSION}
+        - AGENT_ID=cloudrs-gateway-1
+        - APP_NAME=cloudrs-gateway
+    volumes:
+      - data-volume:/pinpoint-agent
     restart: always
     ports:
       - 8080:8080
 
   cloudrs-uc:
     networks:
-      - cloudrs-net
+      - cloudrs
+      - pinpoint
     build:
       context: ./
       dockerfile: Dockerfile-uc
+      args:
+        - PINPOINT_VERSION=${PINPOINT_VERSION}
+        - AGENT_ID=cloudrs-uc-1
+        - APP_NAME=cloudrs-uc-service
+    volumes:
+      - data-volume:/pinpoint-agent
     restart: always
 
   cloudrs-payment:
     networks:
-      - cloudrs-net
+      - cloudrs
+      - pinpoint
     build:
       context: ./
       dockerfile: Dockerfile-payment
+      args:
+        - PINPOINT_VERSION=${PINPOINT_VERSION}
+        - AGENT_ID=cloudrs-payment-1
+        - APP_NAME=cloudrs-payment-service
+    volumes:
+      - data-volume:/pinpoint-agent
     restart: always
 
   cloudrs-monitor:
     networks:
-      - cloudrs-net
+      - cloudrs
     build:
       context: ./
       dockerfile: Dockerfile-monitor
@@ -64,7 +107,7 @@ services:
 
   cloudrs-turbine:
     networks:
-      - cloudrs-net
+      - cloudrs
     build:
       context: ./
       dockerfile: Dockerfile-turbine
@@ -76,7 +119,7 @@ services:
     image: bijukunjummen/rabbitmq-server:3.7.0
     hostname: rabbit1
     networks:
-      - cloudrs-net
+      - cloudrs
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -88,7 +131,7 @@ services:
     image: bijukunjummen/rabbitmq-server:3.7.0
     hostname: rabbit2
     networks:
-      - cloudrs-net
+      - cloudrs
     environment:
       - CLUSTERED=true
       - CLUSTER_WITH=rabbit1
@@ -101,7 +144,7 @@ services:
     image: bijukunjummen/rabbitmq-server:3.7.0
     hostname: rabbit3
     networks:
-      - cloudrs-net
+      - cloudrs
     environment:
       - CLUSTERED=true
       - CLUSTER_WITH=rabbit1
@@ -109,7 +152,7 @@ services:
   redis-cluster:
     image: grokzen/redis-cluster:5.0.5
     networks:
-      - cloudrs-net
+      - cloudrs
 
   mysql-master:
     image: mysql
@@ -119,7 +162,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     networks:
-      - cloudrs-net
+      - cloudrs
 #
 #  mysql-slave:
 #    image: mysql
@@ -132,11 +175,36 @@ services:
 #      - MYSQL_USER=slv
 #      - MYSQL_PASSWORD=slv
 #    networks:
-#      - cloudrs-net
+#      - cloudrs
 
+
+
+#  pinpoint-agent:
+#    container_name: "${PINPOINT_AGENT_NAME}"
+#    image: "pinpointdocker/pinpoint-agent:${PINPOINT_VERSION}"
+#
+#    restart: unless-stopped
+#
+#    networks:
+#      - cloudrs
+#    volumes:
+#      - data-volume:/pinpoint-agent
+#    environment:
+#      - COLLECTOR_IP=${COLLECTOR_IP}
+#      - COLLECTOR_TCP_PORT=${COLLECTOR_TCP_PORT}
+#      - COLLECTOR_STAT_PORT=${COLLECTOR_STAT_PORT}
+#      - COLLECTOR_SPAN_PORT=${COLLECTOR_SPAN_PORT}
+#      - PROFILER_SAMPLING_RATE=${PROFILER_SAMPLING_RATE}
+#      - DEBUG_LEVEL=${AGENT_DEBUG_LEVEL}
+
+volumes:
+  data-volume:
 
 networks:
-  cloudrs-net:
+  cloudrs:
+  pinpoint:
+    external:
+      name: docker_pinpoint
 
 
 

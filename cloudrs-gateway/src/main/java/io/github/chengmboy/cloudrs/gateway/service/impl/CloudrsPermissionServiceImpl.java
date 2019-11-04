@@ -35,23 +35,23 @@ public class CloudrsPermissionServiceImpl implements CloudrsPermissionService {
     @Override
     public boolean hasPermission(HttpServletRequest request, Authentication authentication) {
 
-        Object principal = authentication.getPrincipal();
-        List<SimpleGrantedAuthority> grantedAuthorityList = (List<SimpleGrantedAuthority>) authentication.getAuthorities();
         boolean hasPermission = false;
 
-        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUDRS-MONITOR");
-        String ip = IpHelper.getIpAddr(request);
-        log.info("CLOUDRS-MONITOR ip {} ,request ip {}",instances.get(0).getHost(),ip);
-        boolean monitor = false;
-        for (ServiceInstance instance : instances) {
-            if (instance.getHost().equalsIgnoreCase(ip)) {
-                monitor=true;
-            }
-        }
+        List<ServiceInstance> monitorServices = discoveryClient.getInstances("CLOUDRS-MONITOR");
+        List<ServiceInstance> turbineServices = discoveryClient.getInstances("CLOUDRS-TURBINE");
+        Set<String> allowIps = new HashSet<>();
+        monitorServices.forEach(i->allowIps.add(i.getHost()));
+        turbineServices.forEach(i->allowIps.add(i.getHost()));
 
-        if (monitor) {
+        String ip = IpHelper.getIpAddr(request);
+        if (allowIps.contains(ip)) {
+            //白名单
             return true;
         }
+
+
+        Object principal = authentication.getPrincipal();
+        List<SimpleGrantedAuthority> grantedAuthorityList = (List<SimpleGrantedAuthority>) authentication.getAuthorities();
 
         if (principal != null) {
             if (CollectionUtils.isEmpty(grantedAuthorityList)) {
