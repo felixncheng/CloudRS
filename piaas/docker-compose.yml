@@ -1,0 +1,29 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkinsci/blueocean
+    user: root
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${HOME}:/home
+    ports:
+      - 8001:8080
+
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://192.168.171.207'
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '8002:80'
+    volumes:
+      - '/Users/chengmeinan/srv/gitlab/config:/etc/gitlab'
+      - '/Users/chengmeinan/srv/gitlab/logs:/var/log/gitlab'
+      - '/Users/chengmeinan/srv/gitlab/data:/var/opt/gitlab'
+
+volumes:
+  jenkins-data:

@@ -13,3 +13,5 @@
 * turbine断路器聚合监控
 * zipkin调用链监控
 * pinpoint监控
+* gitlab 代码仓库
+* harbor 镜像仓库
