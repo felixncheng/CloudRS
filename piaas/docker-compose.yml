@@ -1,18 +1,49 @@
 version: '3'
 services:
+  pro:
+    container_name: pro
+    image: docker:sshd
+    networks:
+      - pro
+      - harbor
+      - manager
+    extra_hosts:
+      - 'hub.chengmboy.com:192.168.65.2'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - iaas-ssh:/root/.ssh
+  sit:
+    container_name: sit
+    networks:
+      - sit
+      - harbor
+      - manager
+    image: docker:sshd
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - iaas-ssh:/root/.ssh
   jenkins:
     container_name: jenkins
     image: jenkinsci/blueocean
+    networks:
+      - manager
+      - pro
+      - sit
+      - harbor
     user: root
     volumes:
       - jenkins-data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - ${HOME}:/home
+      - jenkins-ssh:/root/.ssh
     ports:
       - 8001:8080
 
   gitlab:
+    container_name: gitlab
     image: 'gitlab/gitlab-ce:latest'
+    networks:
+      - manager
     restart: always
     environment:
       GITLAB_OMNIBUS_CONFIG: |
@@ -27,3 +58,14 @@ services:
 
 volumes:
   jenkins-data:
+  iaas-ssh:
+  jenkins-ssh:
+
+
+networks:
+  pro:
+  sit:
+  manager:
+  harbor:
+    external:
+      name: harbor_harbor

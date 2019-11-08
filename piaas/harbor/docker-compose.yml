@@ -238,4 +238,3 @@ services:
         tag: "proxy"
 networks:
   harbor:
-    external: false
