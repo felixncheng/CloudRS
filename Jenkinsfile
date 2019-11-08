@@ -9,7 +9,7 @@ def map = [:]
 // 远程管理节点地址（用于执行发版）
 map.put('REMOTE_HOST','pro')
 // 项目gitlab代码地址
-map.put('REPO_URL','http://192.168.171.207:8002/root/cloudrs.git')
+map.put('REPO_URL','http://gitlab/root/cloudrs.git')
 // 分支名称
 map.put('BRANCH_NAME','master')
 // 服务栈名称
