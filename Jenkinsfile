@@ -16,4 +16,4 @@ map.put('BRANCH_NAME','master')
 map.put('STACK_NAME','cloudrs')
 
 // 调用library中var目录下的build.groovy脚本
-build(map)
+deploy(map)
