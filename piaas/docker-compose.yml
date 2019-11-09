@@ -47,7 +47,7 @@ services:
     restart: always
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://192.168.171.207'
+        external_url 'http://gitlab.chengmboy.com'
         # Add any other gitlab.rb configuration here, each on its own line
     ports:
       - '8002:80'
