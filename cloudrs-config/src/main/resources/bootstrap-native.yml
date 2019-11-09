@@ -8,12 +8,12 @@ spring:
       server:
         native:
           search-locations: classpath:/repository
-  profiles:
-    active: native
   rabbitmq:
     addresses: rabbit1:5672,rabbit2:5672,rabbit3:5672
     username: cheng
     password: 123456
+  profiles:
+    active: native
 
 eureka:
   client:
@@ -25,3 +25,8 @@ management:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    root: INFO
+    org.springframework: info
