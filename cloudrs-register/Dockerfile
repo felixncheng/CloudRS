@@ -1,6 +1,6 @@
 FROM chengmboy/java8-jre-enhance
 
-ENV JAVA_OPTS="-javaagent:/pinpoint-agent/pinpoint-bootstrap-1.8.5.jar -Dpinpoint.agentId=clodurs-config-1 -Dpinpoint.applicationName=cloudrs-config"
+ENV JAVA_OPTS="-javaagent:/pinpoint-agent/pinpoint-bootstrap-1.8.5.jar -Dpinpoint.agentId=clodurs-config-1 -Dpinpoint.applicationName=cloudrs-register"
 
 
 VOLUME ["/cloudrs/heap_dump"]
