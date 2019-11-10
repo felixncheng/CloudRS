@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: cloudrs-auth
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: cloudrs-config
+      profile: ${spring.profiles.active}
+      retry:
+        max-attempts: 10
+        initial-interval: 5000
+  profiles:
+    active: dev
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://cloudrs-register:9991/eureka/
+
+logging:
+  level:
+    root: INFO
+    org.springframework: info

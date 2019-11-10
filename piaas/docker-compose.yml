@@ -12,16 +12,16 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - iaas-ssh:/root/.ssh
-  sit:
-    container_name: sit
-    networks:
-      - sit
-      - harbor
-      - manager
-    image: docker:sshd
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - iaas-ssh:/root/.ssh
+#  sit:
+#    container_name: sit
+#    networks:
+#      - sit
+#      - harbor
+#      - manager
+#    image: docker:sshd
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - iaas-ssh:/root/.ssh
   jenkins:
     container_name: jenkins
     image: jenkinsci/blueocean
