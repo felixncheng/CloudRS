@@ -1,0 +1,34 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: cloudrs-config
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/repository
+  rabbitmq:
+    addresses: rabbit1:5672,rabbit2:5672,rabbit3:5672
+    username: cheng
+    password: 123456
+  profiles:
+    active: native
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://cloudrs-register:9991/eureka/
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    root: INFO
+    org.springframework: info
