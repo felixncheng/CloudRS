@@ -1,17 +1,16 @@
 spring:
   application:
-    name: cloudrs-auth
+    name: cloudrs-gateway
   cloud:
     config:
       discovery:
         enabled: true
         serviceId: cloudrs-config
+      fail-fast: true
       profile: ${spring.profiles.active}
-      retry:
-        max-attempts: 10
-        initial-interval: 5000
   profiles:
     active: master
+
 
 eureka:
   client:
