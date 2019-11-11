@@ -181,7 +181,7 @@ services:
 #    networks:
 #      - cloudrs
 
-  #------------------- pinpiont end-----------------------
+  #------------------- paas end-----------------------
 
 
 #  生成pinpoint.jar，pinpiont.config文件，通过卷挂载到具体服务上去
