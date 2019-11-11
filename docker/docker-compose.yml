@@ -15,7 +15,7 @@ services:
       - data-volume:/pinpoint-agent
     restart: always
     ports:
-      - 9992:9991
+      - 9000:9991
 
   cloudrs-config:
     networks:
@@ -105,7 +105,7 @@ services:
       dockerfile: Dockerfile-monitor
     restart: always
     ports:
-      - 9000:9000
+      - 9001:9000
 
   cloudrs-turbine:
     networks:
@@ -115,7 +115,7 @@ services:
       dockerfile: Dockerfile-turbine
     restart: always
     ports:
-      - 8600:8600
+      - 9002:8600
   #------------------- monitor end-----------------------
 
   #------------------- paas start-----------------------
@@ -125,8 +125,7 @@ services:
     networks:
       - cloudrs
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "16672:15672"
     environment:
       - RABBITMQ_DEFAULT_USER=cheng
       - RABBITMQ_DEFAULT_PASS=123456
@@ -141,8 +140,7 @@ services:
       - CLUSTER_WITH=rabbit1
       - RAM_NODE=true
     ports:
-      - "5673:5672"
-      - "15673:15672"
+      - "16673:15672"
 
   rabbit3:
     image: bijukunjummen/rabbitmq-server:3.7.0
@@ -213,23 +211,6 @@ services:
     volumes:
       - /home/pinpoint/hbase
       - /home/pinpoint/zookeeper
-    expose:
-      # zookeeper
-      - "2181"
-      # HBase Master API port
-      - "60000"
-      # HBase Master Web UI
-      - "16010"
-      # Regionserver API port
-      - "60020"
-      # HBase Regionserver web UI
-      - "16030"
-    ports:
-      - "${EXTERNAL_HBASE_PORT:-2181}:2181"
-      - "60000:60000"
-      - "16010:16010"
-      - "60020:60020"
-      - "16030:16030"
     restart: always
 
   pinpoint-mysql:
@@ -237,8 +218,6 @@ services:
     restart: always
     image: "pinpointdocker/pinpoint-mysql:${PINPOINT_VERSION}"
     hostname: pinpoint-mysql
-    ports:
-      - "13306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
@@ -258,12 +237,8 @@ services:
       - pinpoint-hbase
       - pinpoint-mysql
     restart: always
-    expose:
-      - "8080"
-      - "9997"
     ports:
-      - "9997:9997"
-      - "9001:8080"
+      - "9003:8080"
     environment:
       - CLUSTER_ENABLE=${CLUSTER_ENABLE}
       - CLUSTER_ZOOKEEPER_ADDRESS=${CLUSTER_ZOOKEEPER_ADDRESS}
@@ -303,16 +278,6 @@ services:
     depends_on:
       - pinpoint-hbase
     restart: always
-    expose:
-      - "9994"
-      - "9995"
-      - "9996"
-    ports:
-      - "${COLLECTOR_RECEIVER_BASE_PORT:-9994}:9994"
-      - "${COLLECTOR_RECEIVER_STAT_UDP_PORT:-9995}:9995/tcp"
-      - "${COLLECTOR_RECEIVER_SPAN_UDP_PORT:-9996}:9996/tcp"
-      - "${COLLECTOR_RECEIVER_STAT_UDP_PORT:-9995}:9995/udp"
-      - "${COLLECTOR_RECEIVER_SPAN_UDP_PORT:-9996}:9996/udp"
     networks:
       - pinpoint
     environment:

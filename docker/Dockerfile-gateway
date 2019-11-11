@@ -1,4 +1,4 @@
-FROM docker_java8dockerize
+FROM chengmboy/java8-jre-enhance
 
 ARG PINPOINT_VERSION
 ARG AGENT_ID

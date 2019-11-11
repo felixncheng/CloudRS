@@ -15,3 +15,4 @@
 * pinpoint监控
 * gitlab 代码仓库
 * harbor 镜像仓库
+* Jenkins pipeline CI/CD
