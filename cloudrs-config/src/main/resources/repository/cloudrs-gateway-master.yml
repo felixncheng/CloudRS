@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://mysql-master:3306/gateway?useUnicode=true&characterEncoding=utf-8&&useSSL=false&&serverTimezone=Asia/Shanghai&&allowPublicKeyRetrieval=true
+    username: dev
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+security:
+  oauth2:
+    client:
+      client-id: cloudrs
+      client-secret: 123456
+    resource:
+      jwt:
+        key-uri: http://cloudrs-auth:8764/oauth/token_key
+
+zuul:
+  routes:
+    api-auth:
+      path: /auth/**
+      serviceId: cloudrs-auth
+    api-payment:
+      path: /payment/**
+      serviceId: cloudrs-payment
+    api-uc:
+      path: /uc/**
+      serviceId: cloudrs-uc
