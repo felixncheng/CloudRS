@@ -7,17 +7,16 @@ import io.github.chengmboy.cloudrs.common.web.Response;
 import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import io.github.chengmboy.cloudrs.uc.pojo.dto.UserRegisterDTO;
 import io.github.chengmboy.cloudrs.uc.pojo.vo.UserVO;
+import io.github.chengmboy.cloudrs.uc.service.QuotaService;
 import io.github.chengmboy.cloudrs.uc.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -32,6 +31,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    @Autowired
+    private QuotaService quotaService;
+
     @PostMapping("register")
     public Response<UserVO> register(@Validated @ApiParam @RequestBody UserRegisterDTO user) throws GeneralSecurityException {
         log.info(JSONObject.toJSONString(user));
@@ -45,5 +47,11 @@ public class UserController {
     public Response<UserVO> login(@Validated @ApiParam @RequestBody UserRegisterDTO user) throws GeneralSecurityException {
 
         return Response.ok(null);
+    }
+
+    @PostMapping("quota")
+    public Response<Boolean> quota(@ApiParam @RequestParam String code, @ApiParam @RequestParam int count) {
+        quotaService.create(code,count);
+        return Response.ok(Boolean.TRUE);
     }
 }

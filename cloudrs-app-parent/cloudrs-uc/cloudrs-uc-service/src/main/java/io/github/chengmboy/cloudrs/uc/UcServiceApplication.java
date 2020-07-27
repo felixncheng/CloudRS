@@ -8,12 +8,13 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"io.github.chengmboy.cloudrs"})
 @EnableSwagger2
 @EnableHystrix
-@SpringBootApplication(scanBasePackages = {"io.github.chengmboy.cloudrs.uc","io.github.chengmboy.cloudrs.common.bean"})
-@EnableApolloConfig
+@SpringBootApplication(scanBasePackages = {"io.github.chengmboy.cloudrs"})
+//@EnableApolloConfig
 public class UcServiceApplication {
 
 	public static void main(String[] args) {

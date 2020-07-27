@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @EnableEurekaServer
 @SpringBootApplication(scanBasePackages = "io.github.chengmboy.cloudrs.common.bean")
-@EnableApolloConfig
+//@EnableApolloConfig
 public class RegisterApplication {
 
 	public static void main(String[] args) {

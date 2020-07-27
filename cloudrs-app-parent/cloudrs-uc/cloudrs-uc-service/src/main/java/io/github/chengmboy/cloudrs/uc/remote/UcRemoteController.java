@@ -6,9 +6,11 @@ import io.github.chengmboy.cloudrs.uc.api.dto.UserDTO;
 import io.github.chengmboy.cloudrs.uc.pojo.entity.Permission;
 import io.github.chengmboy.cloudrs.uc.pojo.entity.Role;
 import io.github.chengmboy.cloudrs.uc.pojo.repository.RoleRepository;
+import io.github.chengmboy.cloudrs.uc.service.QuotaService;
 import io.github.chengmboy.cloudrs.uc.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +27,10 @@ public class UcRemoteController implements UcRemoteService {
 
     private final RoleRepository roleRepository;
     private final UserService userService;
+
+    @Autowired
+    QuotaService quotaService;
+
     @Override
     public Set<PermissionDTO> findPermissionByRoleCode(String roleCode) {
 
@@ -46,5 +52,10 @@ public class UcRemoteController implements UcRemoteService {
     @Override
     public UserDTO getByLoginName(@PathVariable("loginName") String loginName) {
         return userService.getByLoginName(loginName);
+    }
+
+    @Override
+    public void deduct(String code, int count) {
+        quotaService.deduct(code,count);
     }
 }

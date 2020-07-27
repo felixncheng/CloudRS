@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 		"io.github.chengmboy.cloudrs.common.bean"})
 @EnableHystrix
 @EnableSwagger2
-@EnableApolloConfig
+//@EnableApolloConfig
 public class AuthServiceApplication {
 
 

@@ -14,8 +14,8 @@ public class SwaggerDocumentationConfig {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("AUTH Service")
-            .description("鉴权服务")
+            .title("UC Service")
+            .description("用户服务")
             .version("1.0.0")
             .build();
     }
@@ -24,7 +24,7 @@ public class SwaggerDocumentationConfig {
     public Docket customImplementation(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                    .apis(RequestHandlerSelectors.basePackage("io.github.chengmboy.cloudrs.auth.controller"))
+                    .apis(RequestHandlerSelectors.basePackage("io.github.chengmboy.cloudrs.uc.controller"))
                     .build()
                 .apiInfo(apiInfo());
     }

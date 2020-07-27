@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author cheng_mboy
  */
 @FeignClient(PaymentConstants.CloudRsPayment)
-@Api(description = "账户服务")
+@Api("账户服务")
 public interface BalanceRemoteService {
 
     @ApiOperation("查询账户")

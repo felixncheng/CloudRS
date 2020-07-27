@@ -8,6 +8,8 @@ import io.github.chengmboy.cloudrs.uc.api.fallback.UcRemoteFallbackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
 
@@ -19,4 +21,7 @@ public interface UcRemoteService {
 
     @GetMapping("/user/login/{loginName}")
     UserDTO getByLoginName(@PathVariable("loginName") String loginName);
+
+    @PutMapping
+    void deduct(@RequestParam String code, @RequestParam int count);
 }

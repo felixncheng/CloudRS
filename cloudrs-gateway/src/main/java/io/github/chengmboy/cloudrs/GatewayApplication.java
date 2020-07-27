@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableEurekaClient
 @EnableHystrix
 @SpringBootApplication(scanBasePackages = {"io.github.chengmboy.cloudrs"})
-@EnableApolloConfig
+//@EnableApolloConfig
 public class GatewayApplication {
 
 	public static void main(String[] args) {

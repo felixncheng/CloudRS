@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Created by kl on 2018/6/25. Content :动态日志配置
  */
-@Service
+//@Service
 public class LoggerConfiguration {
   private static final Logger logger = LoggerFactory.getLogger(LoggerConfiguration.class);
   private static final String LOGGER_TAG = "logging.level.";

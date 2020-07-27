@@ -24,4 +24,11 @@ public class UcRemoteFallbackImpl implements UcRemoteService {
         log.error("调用{}异常:{}", "getByLoginName", loginName);
         return null;
     }
+
+    @Override
+    public void deduct(String code, int count) {
+        log.error("调用{}异常:{}", "deduct", code);
+    }
+
+
 }
