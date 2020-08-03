@@ -18,6 +18,7 @@
 * Jenkins pipeline CI/CD
 * apollo配置中心
 * seata分布式事务
+* 统一文档中心（Swagger）
 
 # 启动服务
 分别按顺序启动register/config/auth/gateway/uc/payment service

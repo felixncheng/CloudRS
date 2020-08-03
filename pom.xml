@@ -13,10 +13,16 @@
         <module>cloudrs-common</module>
         <module>cloudrs-gateway</module>
         <module>cloudrs-config</module>
-        <module>cloudrs-app-parent</module>
+<!--        <module>cloudrs-app-parent</module>-->
         <module>cloudrs-auth</module>
         <module>cloudrs-monitor</module>
         <module>cloudrs-turbine</module>
+        <module>cloudrs-starter-service</module>
+        <module>cloudrs-starter-remote-api</module>
+        <module>cloudrs-uc</module>
+        <module>cloudrs-payment</module>
+        <module>cloudrs-resource</module>
+        <module>cloudrs-order</module>
     </modules>
 
 
@@ -33,6 +39,7 @@
         <fastjson.version>1.2.58</fastjson.version>
         <springfox-version>2.7.0</springfox-version>
         <ttl.version>2.2.0</ttl.version>
+        <apollo.version>1.1.0</apollo.version>
     </properties>
 
     <dependencies>

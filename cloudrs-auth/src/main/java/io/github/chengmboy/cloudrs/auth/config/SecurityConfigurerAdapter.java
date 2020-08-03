@@ -23,6 +23,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 http.authorizeRequests();
 //        filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
         registry.antMatchers("/actuator/**").permitAll();
+        registry.antMatchers("/v2/api-docs").permitAll();
         registry.anyRequest().authenticated()
                 .and()
                 .csrf().disable();

@@ -38,9 +38,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.headers().frameOptions().disable();
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .authorizeRequests();
-        registry.antMatchers("/auth/**").permitAll();
+//        registry.antMatchers("/auth/**").permitAll();
+//        registry.antMatchers("/").permitAll();
+//        registry.antMatchers(("/swagger-ui.html")).permitAll();
+//        registry.antMatchers("/swagger-resources").permitAll();
 //        filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
-        registry.anyRequest().access("@CloudrsPermissionService.hasPermission(request,authentication)");
+//        registry.anyRequest().access("@CloudrsPermissionService.hasPermission(request,authentication)");
+        registry.anyRequest().permitAll();
     }
 
     @Override
